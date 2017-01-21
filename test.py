@@ -1,6 +1,11 @@
 from sys import exit
 
 
+# Test File
+# this file has the classes that make testing nice and easy ;)
+# this stuff is used in the tests.py file.
+
+
 class Test():
   def __init__(self,function,requires=[]):
     self.function = function

@@ -11,6 +11,11 @@ from view import View
 import variables,screen_object,space
 
 
+# Window File
+# this file is for the classes and functions that deal with drawing things on the window and the window its self
+# as well as handling things like keyboard and mouse input
+
+
 # increase performance by not checking for errors when drawing stuff.
 # i don't know how to use these errors to fix stuff so there's no reason
 # to have it on

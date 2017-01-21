@@ -1,6 +1,12 @@
 from space import Position2i,Position3f,Position2f
 
 
+# Variables File
+# a file to store constants and stuff so it is easy to change.
+# something like the gravity constant, or the size of the simulation space
+# and all that go in here
+
+
 # window stuff
 screen_size = Position2i(800,600)
 

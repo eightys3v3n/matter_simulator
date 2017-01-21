@@ -19,7 +19,10 @@ if __name__ == "__main__":
       # create a window
       window = Window()
 
+      # create a shape that will draw lines around the simulation boundries
       bounds = ScreenObject("rectangle",[Position3f(0,0,-4),Position3f(10,10,0)])
+
+      # load the bounds shape into the window so it is being drawn
       window.load_object(bounds)
 
       # run the window, starts drawing and all that stuff

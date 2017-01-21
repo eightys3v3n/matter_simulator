@@ -3,6 +3,11 @@ from space import Position3f
 import variables
 
 
+# ScreenObject File
+# this file is used for classes and functions that store the information behind the shapes being
+# drawn on the screen. A ScreenObject is some shape, image, or text that can be drawn in the window
+
+
 class ScreenObject:
   def __init__(self,o_type,position=[]):
     self.vertices = []

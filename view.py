@@ -3,6 +3,13 @@ from math import hypot,cos,sin,tan,acos,atan,asin,radians,degrees,atan2
 from space import Position3f,Position2f
 import variables
 
+
+# View File
+# this file contains the stuff to change how the user is viewing the simulation
+# it currently does stuff like rotating the view, looking side to side, and flying
+# around the simulation space.
+
+
 class View:
   def __init__(self):
     self.position = Position3f()

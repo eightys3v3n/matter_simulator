@@ -1,5 +1,12 @@
 from math import hypot,cos,sin,tan,acos,atan,asin,degrees,radians
 
+
+# Space File
+# this file has the classes and functions dealing with coordinate system objects and their math
+# only functions that work on or with the classes are for here. Anything like gravity calculations
+# should go else where; however displacement, angle, vector calculations can go here
+
+
 class Position2i:
   def __init__(self,x=0,y=0):
     self.x = int(x)
