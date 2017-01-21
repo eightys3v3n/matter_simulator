@@ -9,6 +9,7 @@ if __name__ == "__main__":
 
   else:
     from pyglet.app import run
+    from pyglet.gl import glPointSize
     import variables
     from window import Window
     from screen_object import ScreenObject
@@ -18,8 +19,8 @@ if __name__ == "__main__":
       # create a window
       window = Window()
 
-      obj = ScreenObject("point",Position3f(0,0,-4))
-      window.load_object(obj)
+      bounds = ScreenObject("rectangle",[Position3f(0,0,-4),Position3f(10,10,0)])
+      window.load_object(bounds)
 
       # run the window, starts drawing and all that stuff
       run()

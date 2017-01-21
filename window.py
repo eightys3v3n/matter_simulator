@@ -6,6 +6,8 @@ from pyglet.window import mouse
 from pyglet.clock import schedule_interval
 from pyglet.clock import set_fps_limit
 from pyglet.gl import *
+from space import Position3f,Position2f
+from view import View
 import variables,screen_object,space
 
 
@@ -53,19 +55,21 @@ class Window(Window):
     glDepthFunc(GL_LESS)
 
     # don't draw stuff you can't see anyways
-    glEnable(GL_CULL_FACE)
+    #glEnable(GL_CULL_FACE)
 
     # don't draw stuff that is behind something else
-    glCullFace(GL_BACK)
+    #glCullFace(GL_BACK)
 
     # when looking at a square you are drawing, the "front" of the 2d square is the side
     # that your looking at when you draw the cube counter-clock-wise
-    glFrontFace(GL_CCW)
+    #glFrontFace(GL_CCW)
 
     # an array of things to draw
     self.batch = Batch()
-    self.changed_batch = False
 
+    self.view = View()
+
+    self.mouse_locked = False
 
   # called when the window closes, used to stop threads and stuff
   def quit(self):
@@ -77,15 +81,38 @@ class Window(Window):
     pass
 
 
+  def lock_mouse(self):
+    self.mouse_locked = True
+    self.set_exclusive_mouse(True)
+
+
+  def unlock_mouse(self):
+    self.mouse_locked = False
+    self.set_exclusive_mouse(False)
+
+
   # handles "is the up arrow pressed right now" kind of stuff
   def check_user_input(self):
-    if self.keys[key.LEFT]:
-      print("left arrow key is pressed")
+    view_position = Position3f()
+    if self.keys[key.LEFT] or self.keys[key.A]:
+      view_position.x += variables.move_speed.x
+    if self.keys[key.RIGHT] or self.keys[key.D]:
+      view_position.x -= variables.move_speed.x
+    if self.keys[key.SPACE]:
+      view_position.y -= variables.move_speed.y
+    if self.keys[key.LSHIFT]:
+      view_position.y += variables.move_speed.y
+    if self.keys[key.UP] or self.keys[key.W]:
+      view_position.z += variables.move_speed.z
+    if self.keys[key.DOWN] or self.keys[key.S]:
+      view_position.z -= variables.move_speed.z
+    if view_position != Position3f():
+      self.view.move(position=view_position)
 
 
   def on_key_press(self,symbol,modifiers):
-    if symbol == key.F:
-      print("the F key was pressed")
+    if symbol == key.ESCAPE:
+      self.unlock_mouse()
 
 
   def on_key_release(self,symbol,modifiers):
@@ -95,18 +122,23 @@ class Window(Window):
 
   def on_mouse_scroll(self,x,y,scroll_x,scroll_y):
     if scroll_y < 0:
-      print("scrolling top of mouse wheel down")
+      variables.move_speed *= 0.9
     elif scroll_y > 0:
-      print("scrolling top of mouse wheel up")
+      variables.move_speed *= 1.1
+      #print("scrolling top of mouse wheel up")
 
 
   def on_mouse_motion(self,x,y,dx,dy):
-    print("the mouse is now at "+str(x)+","+str(y)+" and it moved "+str(dx)+","+str(dy)+" pixels to get there")
+    if self.mouse_locked:
+      view_angle = Position2f()
+      view_angle.x = -dy*variables.mouse_sensitivity.x
+      view_angle.y = dx*variables.mouse_sensitivity.y
+      self.view.look(view_angle)
 
 
   def on_mouse_press(self,x,y,button,modifiers):
     if button == mouse.LEFT:
-      print("clicked left mouse button at "+str(x)+","+str(y))
+      self.lock_mouse()
 
 
   def unload_all_objects(self):
@@ -115,21 +147,21 @@ class Window(Window):
 
   def load_object(self,obj):
     print(obj.gl_vertices)
-    print(obj.gl_mode)
+    print(obj.gl_order)
     if len(obj.vertices) == 0:
       return
 
     if obj.type == "point":
       self.batch.add(len(obj.vertices),obj.gl_mode,None,obj.gl_vertices)
+    elif obj.type == "rectangle":
+      self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
     else:
       print("loading unknown type",obj.type)
-      self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_vertices)
-    self.changed_batch = True
+      self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
 
 
   def reload_objects(self,objects):
     self.unload_all_objects()
-
     for obj in objects:
       self.load_object(obj)
 
@@ -144,7 +176,7 @@ class Window(Window):
 
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluPerspective(65.0,800.0/500.0,0.1,1000.0)
+    self.view.draw()
 
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
