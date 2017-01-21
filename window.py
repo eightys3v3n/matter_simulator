@@ -86,11 +86,13 @@ class Window(Window):
     pass
 
 
+  # makes the mouse like it is in minecraft
   def lock_mouse(self):
     self.mouse_locked = True
     self.set_exclusive_mouse(True)
 
 
+  # frees the mouse
   def unlock_mouse(self):
     self.mouse_locked = False
     self.set_exclusive_mouse(False)
@@ -115,16 +117,19 @@ class Window(Window):
       self.view.move(position=view_position)
 
 
+  # called when a key is pressed
   def on_key_press(self,symbol,modifiers):
     if symbol == key.ESCAPE:
       self.unlock_mouse()
 
 
+  # called when a key is released
   def on_key_release(self,symbol,modifiers):
     if symbol == key.F:
       print("the F key was released")
 
 
+  # called when one scrolls the mouse wheel
   def on_mouse_scroll(self,x,y,scroll_x,scroll_y):
     if scroll_y < 0:
       variables.move_speed *= 0.9
@@ -133,6 +138,7 @@ class Window(Window):
       #print("scrolling top of mouse wheel up")
 
 
+  # called when the mouse moves
   def on_mouse_motion(self,x,y,dx,dy):
     if self.mouse_locked:
       view_angle = Position2f()
@@ -141,15 +147,18 @@ class Window(Window):
       self.view.look(view_angle)
 
 
+  # called when ome clicks
   def on_mouse_press(self,x,y,button,modifiers):
     if button == mouse.LEFT:
       self.lock_mouse()
 
 
+  # removes all the stuff currently being drawn on the screen every frame
   def unload_all_objects(self):
     self.batch = Batch()
 
 
+  # add a ScreenObject to the batch so it is drawn every frame
   def load_object(self,obj):
     print(obj.gl_vertices)
     print(obj.gl_order)
@@ -165,6 +174,8 @@ class Window(Window):
       self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
 
 
+  # clear all things being drawn and instead draw all the objects in the array
+  # 'objects' every frame
   def reload_objects(self,objects):
     self.unload_all_objects()
     for obj in objects:
@@ -179,12 +190,18 @@ class Window(Window):
 
     self.clear() # clear the screen
 
+    # GL_PROJECTION is used when you want to change how the user looks
+    # at the world, but not actually move the stuff. switch to this before
+    # changing the users perspective
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     self.view.draw()
 
+    # GL_MODELVIEW is used to actually draw stuff. switch to this before
+    # drawing things
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
+    
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
     glColor3f(175.0,175.0,175.0)
     self.batch.draw()
