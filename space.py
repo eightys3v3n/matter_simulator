@@ -94,27 +94,10 @@ class Position2f:
 
 
 class Position3f:
-  def __init__(self,x=0.0,y=0.0,z=0.0,angles=None):
-    x = float(x)
-    y = float(y)
-    z = float(z)
-
-    if isinstance(angles,Position2f):
-      self.x = sin(radians(angles.y))
-      self.y = sin(radians(angles.x))
-      if angles.x:
-        self.z = cos(radians(angles.x))
-      elif angles.y:
-        self.z = cos(radians(angles.y))
-      else:
-        self.z = 1.0
-      self.x = round(self.x,6)
-      self.y = round(self.y,6)
-      self.z = round(self.z,6)
-    else:
-      self.x = x
-      self.y = y
-      self.z = z
+  def __init__(self,x=0.0,y=0.0,z=0.0):
+    self.x = float(x)
+    self.y = float(y)
+    self.z = float(z)
 
 
   @property
@@ -328,9 +311,9 @@ def main():
   print(a-b)
 
   a = Vector3f(Position3f(10,10,10))
-  b = Vector3f(Position3f(2,2,2))
-  print(a+b)
-  return
+  b = Vector3f(Position3f(0,0,0))
+  a += b
+  print(a)
 
 
   L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))
