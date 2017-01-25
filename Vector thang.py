@@ -1,15 +1,16 @@
-n=5
+n=2
+from vectors import Vector3f
+from position import Position3f
 
-vector1 = [2,5,7]
-vector2 = [8,10,3]
-vector3 = [7,12,13]
-vector4 = [1,2,3]
-vector5 = [7,2,4]
+v1 = Vector3f(Position3f(2,5,7),Position3f(0,0,0))
+vector1 = v1.direction
+v2 = Vector3f(Position3f(9,1,5),Position3f(0,0,0))
+vector2 = v2.direction
 
 m=0
 k=0
 
-vectors=[vector1,vector2,vector3,vector4,vector5]
+vectors=[vector1,vector2]
 x=vectors[k]
 y=vectors[m]
 for x in vectors:
@@ -21,13 +22,7 @@ for x in vectors:
 				k =+ 1
 				break
 		else:
-			r = []
-			ri = y[0] - x[0]
-			r.append(ri)
-			rj = y[1] - x[1]
-			r.append(rj)
-			rk = y[2] - x[2]
-			r.append(rk)
+			y-x
 			print(r)
 			m =+ 1
 			if m == n:
