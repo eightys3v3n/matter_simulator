@@ -52,16 +52,16 @@ class Vector3f:
 
   def __sub__(self,other):
     new = Vector3f()
-    cur = self.destination
-    oth = other.destination
+    own_zero_origin = self.destination
+    other_zero_origin = other.destination
 
     if self.origin != Position3f():
-      cur = self.direction()
+      own_zero_origin = self.direction
 
-    if self.origin != Position3f():
-      oth = other.origin()
+    if other.origin != Position3f():
+      other_zero_origin = other.direction
 
-    new.destination = cur - oth
+    new.destination = own_zero_origin - other_zero_origin
     return new
 
 
@@ -74,12 +74,22 @@ class Vector3f:
 
 
 def main():
-	L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))
-	h=L.direction
-	print(h)
-	k=L.magnitude
-	print(k)
-	input("does this look right")
+
+  a = Position3f(10,10,10)
+  b = Position3f(5,5,5)
+  print(a-b)
+
+  a = Vector3f(Position3f(10,10,10))
+  b = Vector3f(Position3f(2,2,2))
+  print(a-b)
+
+
+  L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))
+  h=L.direction
+  print(h)
+  k=L.magnitude
+  print(k)
+  input("does this look right")
 
 
 if __name__ == "__main__":
