@@ -35,6 +35,10 @@ class Position2f:
     return "("+str(self.x)+","+str(self.y)+")"
 
 
+  def __repr__(self):
+    return self.__str__()
+
+
   def __eq__(self,other):
     if not isinstance(other,Position2f):
       return False
@@ -113,30 +117,17 @@ class Position3f:
       self.z = z
 
 
-  def __getattr__(self,key):
-    if key == "array":
-      return (self.x,self.y,self.z)
-    elif key == "angles":
-      angles = Position2f()
-      if not self.x and not self.y and not self.z:
-        return Position2f(0,0)
-      elif not self.x and not self.y and self.z:
-        return Position2f(0,0)
-      elif not self.x and self.y and not self.z:
-        return Position2f(90,0)
-      elif self.x and not self.y and not self.z:
-        return Position2f(0,90)
-
-      if self.z:
-        angles.x = degrees(atan(self.y/self.z))
-      if self.x:
-        angles.y = degrees(atan(self.z/self.x))
-      return angles
-
+  @property
+  def array(self):
+    return (self.x,self.y,self.z)
 
 
   def __str__(self):
     return "("+str(self.x)+","+str(self.y)+","+str(self.z)+")"
+
+
+  def __repr__(self):
+    return self.__str__()
 
 
   def __eq__(self,other):
@@ -253,6 +244,37 @@ class Vector3f:
     return angles
 
 
+  @property
+  def x(self):
+    return self.destination.x - self.origin.x
+
+
+  @property
+  def y(self):
+    return self.destination.y - self.origin.y
+
+
+  @property
+  def z(self):
+    return self.destination.z - self.origin.z
+
+
+  @x.setter
+  def x(self,v):
+    self.destination.x = self.origin.x + v
+
+
+  @y.setter
+  def y(self,v):
+    self.destination.y = self.origin.y + v
+
+
+  @z.setter
+  def z(self,v):
+    self.destination.z = self.origin.z + v
+
+
+
   def __eq__(self,other):
     if self.origin != other.origin:
       return False
@@ -276,6 +298,21 @@ class Vector3f:
     return new
 
 
+  def __add__(self,other):
+    new = Vector3f()
+    own_zero_origin = self.destination
+    other_zero_origin = other.destination
+
+    if self.origin != Position3f():
+      own_zero_origin = self.direction.destination
+
+    if other.origin != Position3f():
+      other_zero_origin = other.direction.destination
+
+    new.destination = own_zero_origin + other_zero_origin
+    return new
+
+
   def __str__(self):
     array = []
     array.append(self.destination.x - self.origin.x)
@@ -292,7 +329,8 @@ def main():
 
   a = Vector3f(Position3f(10,10,10))
   b = Vector3f(Position3f(2,2,2))
-  print(a-b)
+  print(a+b)
+  return
 
 
   L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))

@@ -8,6 +8,7 @@ from pyglet.clock import set_fps_limit
 from pyglet.gl import *
 from space import Position3f,Position2f
 from view import View
+from simulation import Simulation
 import variables,screen_object,space
 
 
@@ -23,7 +24,7 @@ options['debug_gl'] = False
 
 
 class Window(Window):
-  def __init__(self):
+  def __init__(self,objects):
     # puts all the stuff in the pyglet.window.Widnow class inside this class
     # so instead of creating a window and calling self.window.function, you can call
     # self.function
@@ -69,14 +70,12 @@ class Window(Window):
     # that your looking at when you draw the cube counter-clock-wise
     #glFrontFace(GL_CCW)
 
-    # an array of things to draw
-    self.batch = Batch()
+    self.objects = objects
 
     self.view = View()
 
     self.mouse_locked = False
 
-    self.spheres = []
 
   # called when the window closes, used to stop threads and stuff
   def quit(self):
@@ -155,39 +154,6 @@ class Window(Window):
       self.lock_mouse()
 
 
-  # removes all the stuff currently being drawn on the screen every frame
-  def unload_all_objects(self):
-    self.batch = Batch()
-
-
-  # add a ScreenObject to the batch so it is drawn every frame
-  def load_object(self,obj):
-    print(obj.gl_vertices)
-    print(obj.gl_order)
-    if len(obj.vertices) == 0:
-      return
-
-    if obj.type == "point":
-      self.batch.add(len(obj.vertices),obj.gl_mode,None,obj.gl_vertices)
-    elif obj.type == "rectangle":
-      self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
-    else:
-      print("loading unknown type",obj.type)
-      self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
-
-
-  def load_sphere(self,sphere):
-    self.spheres.append(sphere)
-
-
-  # clear all things being drawn and instead draw all the objects in the array
-  # 'objects' every frame
-  def reload_objects(self,objects):
-    self.unload_all_objects()
-    for obj in objects:
-      self.load_object(obj)
-
-
   # called every frame to actually draw the frame
   def on_draw(self):
     # checks to see if you are pressing say, the left arrow key, and does
@@ -208,13 +174,6 @@ class Window(Window):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    #sphere = gluNewQuadric()
-    #gluSphere(sphere,10,100,20)
-
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
-    glColor3f(175.0,175.0,175.0)
-    self.batch.draw()
-
-    for sphere in self.spheres:
-      sphere.draw()
-      sphere.position.x += 0.01
+    for obj in self.objects:
+      obj.draw()

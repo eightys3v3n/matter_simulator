@@ -10,7 +10,7 @@ import test_files
 
 
 class Test():
-  def __init__(self,function,requires=[]):
+  def __init__(self,function,requires):
     self.function = function
     self.requires = requires
     self.completed = False
@@ -40,21 +40,31 @@ class Tests():
     self.tests = []
 
 
-  def new(self,function,func_requires=[]):
-    requires = []
+  def already_testing(self,function):
+    for test in self.tests:
+      if test.function == function:
+        return True
+    return False
 
-    for req in func_requires:
-      for test in self.tests:
-        if test.function == test:
-          requires.append(test)
-    self.tests.append(Test(function,requires))
+
+  def new(self,function,func_requires=[]):
+    if not self.already_testing(function):
+      self.tests.append(Test(function,func_requires))
 
 
   def run_test(self,test):
-    for req in test.requires:
-      if not isinstance(req,Test):
-        raise Exception(test.name+" requires a non-test ",req)
-      self.run_test(req)
+    if not test.completed:
+      for req in test.requires:
+        req_test = None
+        for funcs in self.tests:
+          if req == funcs.function:
+            req_test = funcs
+
+        if req_test == None:
+          raise Exception(test.name+" requires a non-test ",req)
+
+        if not req_test.completed:
+          self.run_test(req_test)
 
     ret = test()
     if ret == False:
@@ -85,7 +95,6 @@ tests = Tests()
 
 
 def compile_tests(module):
-  # runs every function in the tests file
   for function_str in dir(module):
     function = getattr(module,function_str)
 
@@ -94,7 +103,8 @@ def compile_tests(module):
     elif callable(function) and len(function_str) > 5 and function_str[-5:] == "_Test":
       requirements = getattr(module,function_str+"_req")
       tests.new(function,requirements)
-
+      #print("found test",function_str)
+      #print("  requires",requirements)
 
 
 def test_all():

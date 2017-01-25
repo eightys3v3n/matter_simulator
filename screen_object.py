@@ -1,125 +1,138 @@
-from pyglet.gl import GL_POINTS,GL_QUADS
-from pyglet.gl import gluNewQuadric,gluSphere,glTranslatef
-from position import Position3f
+from pyglet.gl import *
+from space import Position3f
 import variables
 
 
-# ScreenObject File
-# this file is used for classes and functions that store the information behind the shapes being
-# drawn on the screen. A ScreenObject is some shape, image, or text that can be drawn in the window
-
-
 class ScreenObject:
-  def __init__(self,o_type,position=[]):
-    self.position = Position3f()
-    self.sphere_args = [0,0,0]
-    self.vertices = []
-    self.colour = []
+  def __init__(self,o_type,position=Position3f(),size=Position3f(10,10,0),radius=1,colour=[255.0,255.0,255.0]):
     self.type = None
+    self.position = position
+    self.radius = None
+    self.sphere_args = None
+    self.size = None
+    self.colour = colour
     self.max_points = 0
+    self.gl_mode = None
+    self.vertices = []
+    self.vertices_colour = []
+    self.quadric = None
 
-    if not isinstance(position,(list,tuple,Position3f)):
-      raise Exception("position must be a list of Position3f",type(position))
+    if not isinstance(position,Position3f):
+      raise Exception("position must be a Position3f")
+
+    if not isinstance(size,Position3f):
+      raise Exception("size must be a Position3f")
 
     if o_type == "point":
-      self.type = o_type
+      self.type = "point"
       self.gl_mode = GL_POINTS
       self.max_points = 1
-      if len(position) != 1:
-        raise Exception("a point can only be initialized with 1 Position3f",position)
-
       self.add_point(position[0])
 
     elif o_type == "rectangle":
-      self.type = o_type
+      self.type = "rectangle"
       self.gl_mode = GL_QUADS
       self.max_points = 4
-
-      if len(position) != 2:
-        raise Exception("a rectangle can only be initialized with 2 Position3f",position)
-      self.rectangle_at(position[0],position[1])
-
-    elif o_type == "cube":
-      self.type = o_type
-      self.gl_mode = GL_QUADS
-      self.max_points = 24
+      self.size = size
+      self.generate_rectangle()
 
     elif o_type == "sphere":
-      self.type = o_type
-      self.gl_mode = None
-      self.max_points = 2
-
-      if len(position) != 2:
-        raise Exception("a sphere can only be initialized with 2 Position3f",position)
-
-      self.position = position[0]
-      self.sphere_args = position[1]
+      self.type = "sphere"
+      self.max_points = 1
+      self.radius = radius
+      self.sphere_args = variables.default_sphere_args
+      self.quadric = gluNewQuadric()
 
     else:
       raise Exception("unknown object type",o_type)
 
-    if not isinstance(o_type,str):
-      raise Exception("expected a string for type, got '"+str(type(o_type))+"'")
+
+  @property
+  def gl_vertices(self):
+    if self.type == "sphere":
+      raise Exception("can't get the vertices of a sphere")
+
+    ret = ()
+    for vert in self.vertices:
+      ret += (vert.x,vert.y,vert.z)
+    return ("v3f",ret)
 
 
-  def __getattr__(self,key):
-    if key == "gl_vertices":
-      ret = ()
-      for vert in self.vertices:
-        ret += (vert.x,vert.y,vert.z)
-      return ("v3f",ret)
-    elif key == "gl_order":
-      r = []
-      if self.type == "point":
-        r = [0]
-      elif self.type == "rectangle" or self.type == "cube":
-        for i in range(len(self.vertices)):
-          r.append(i)
-        r.append(0)
+  @property
+  def gl_order(self):
+    if self.type != "rectangle":
+      raise Exception("can't get vertices of objects other than rectangles and cubes")
 
-      return r
+    r = []
+    for i in range(len(self.vertices)):
+      r.append(i)
+    r.append(0)
+
+    return r
 
 
   def add_point(self,point):
+    if self.type == "sphere":
+      raise Exception("can't add points to a sphere, they are auto-generated")
     if not isinstance(point,Position3f):
       raise Exception("expected a Position3f object",type(point))
 
     if len(self.vertices) >= self.max_points:
-      print("can't add a second point to a point object")
+      print("can't add a more points to '"+self.type+"' object which has a maximum of "+str(self.max_points)+" points")
     else:
       self.vertices.append(point)
-      self.colour.append(variables.default_colour)
+      self.vertices_colour.append(self.colour)
 
 
   def add_points(self,points):
+    if self.type == "sphere":
+      raise Exception("can't add points to a sphere, they are auto-generated")
     if not isinstance(points,(list,tuple,Position3f)):
-      raise Exception("expected an array of Position3f objects",type(points))
+      raise Exception("expected a tuple of Position3f objects",type(points))
 
     for point in points:
       self.add_point(point)
 
 
-  def rectangle_at(self,pos,size):
-    if size.x == 0:
-      self.add_point(Position3f(pos.x,pos.y-size.y/2,pos.z-size.z/2))
-      self.add_point(Position3f(pos.x,pos.y+size.y/2,pos.z-size.z/2))
-      self.add_point(Position3f(pos.x,pos.y+size.y/2,pos.z+size.z/2))
-      self.add_point(Position3f(pos.x,pos.y-size.y/2,pos.z+size.z/2))
-    elif size.y == 0:
-      self.add_point(Position3f(pos.x-size.x/2,pos.y,pos.z+size.z/2))
-      self.add_point(Position3f(pos.x-size.x/2,pos.y,pos.z-size.z/2))
-      self.add_point(Position3f(pos.x+size.x/2,pos.y,pos.z-size.z/2))
-      self.add_point(Position3f(pos.x+size.x/2,pos.y,pos.z+size.z/2))
-    elif size.z == 0:
-      self.add_point(Position3f(pos.x-size.x/2,pos.y-size.y/2,pos.z))
-      self.add_point(Position3f(pos.x-size.x/2,pos.y+size.y/2,pos.z))
-      self.add_point(Position3f(pos.x+size.x/2,pos.y+size.y/2,pos.z))
-      self.add_point(Position3f(pos.x+size.x/2,pos.y-size.y/2,pos.z))
+  def generate_rectangle(self):
+    if self.type != "rectangle":
+      raise Exception("can't generate a rectangle of non-rectangle objects")
+
+    p = self.position
+    p2 = Position3f()
+    p2.x = p.x + self.size.x
+    p2.y = p.y + self.size.y
+    p2.z = p.z + self.size.z
+
+    if self.size.x == 0:
+      self.add_point(Position3f(p.x,p.y-p2.y/2,p.z-p2.z/2))
+      self.add_point(Position3f(p.x,p.y+p2.y/2,p.z-p2.z/2))
+      self.add_point(Position3f(p.x,p.y+p2.y/2,p.z+p2.z/2))
+      self.add_point(Position3f(p.x,p.y-p2.y/2,p.z+p2.z/2))
+    elif self.size.y == 0:
+      self.add_point(Position3f(p.x-p2.x/2,p.y,p.z+p2.z/2))
+      self.add_point(Position3f(p.x-p2.x/2,p.y,p.z-p2.z/2))
+      self.add_point(Position3f(p.x+p2.x/2,p.y,p.z-p2.z/2))
+      self.add_point(Position3f(p.x+p2.x/2,p.y,p.z+p2.z/2))
+    elif self.size.z == 0:
+      self.add_point(Position3f(p.x-p2.x/2,p.y-p2.y/2,p.z))
+      self.add_point(Position3f(p.x-p2.x/2,p.y+p2.y/2,p.z))
+      self.add_point(Position3f(p.x+p2.x/2,p.y+p2.y/2,p.z))
+      self.add_point(Position3f(p.x+p2.x/2,p.y-p2.y/2,p.z))
+    else:
+      raise Exception("you can'y have a 3d rectangle",self.size)
+
+
+  def update_from_particle(self,particle):
+    self.position = particle.position
+    self.radius = particle.radius
 
 
   def draw(self):
-    if self.type == "sphere":
-      sphere = gluNewQuadric()
-      glTranslatef(self.position.x,self.position.y,self.position.z)
-      gluSphere(sphere,int(self.sphere_args.x),int(self.sphere_args.y),int(self.sphere_args.z))
-      glTranslatef(-self.position.x,-self.position.y,-self.position.z)
+    if self.type != "sphere":
+      raise Exception("can only use ScreenObject.draw on sphere types")
+
+    glColor3f(self.colour[0],self.colour[1],self.colour[2])
+    glTranslatef(self.position.x,self.position.y,self.position.z)
+    gluSphere(self.quadric,self.radius,self.sphere_args[0],self.sphere_args[1])
+    glTranslatef(-self.position.x,-self.position.y,-self.position.z)

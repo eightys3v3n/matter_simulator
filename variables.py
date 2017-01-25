@@ -20,9 +20,16 @@ default_colour = [175.0,175.0,175.0] # RGB
 
 
 # controls
-move_speed = Position3f(0.1,0.1,0.1)
+move_speed = Position3f(1,1,1)
 mouse_sensitivity = Position2f(0.5,0.5)
 
 
+# the default radius and such of spheres
+default_sphere_args = [30,30]
 
-default_sphere_args = [1,30,30]
+# perform a physics update every this many fractions of a second
+physics_update_time = 1.0/10.0
+
+# max number of actions that the simulation or the window can queue up before it is told
+# to wait before inserting any more
+max_queue_size = 10

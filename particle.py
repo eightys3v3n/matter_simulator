@@ -1,6 +1,6 @@
 import variables
-from position import Position3f
-from vectors import Vector3f
+from screen_object import ScreenObject
+from space import Position3f,Vector3f
 
 
 # Particle File
@@ -9,12 +9,13 @@ from vectors import Vector3f
 
 
 class Particle:
-  def __init__(self,mass=0,density=0):
+  def __init__(self,mass=10,density=1):
     self.mass = mass
     self.density = density
     self.position = Position3f()
     self.velocity = Vector3f()
     self.acceleration = Vector3f()
+    self.velocity = 10
 
 
   # returns the radius as calculated by mass and density
@@ -28,7 +29,9 @@ class Particle:
   # will be called every frame to move the particle
   def update(self):
     self.velocity += self.acceleration #make sure that this is actually acceleration * time
-    self.position += self.velocity
+    print("acceleration",self.acceleration)
+    print("new velocity",self.velocity)
+    self.position += self.velocity.direction.destination
 
 
   def __eq__(self,other):
