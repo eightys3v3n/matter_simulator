@@ -30,6 +30,11 @@ if __name__ == "__main__":
 
       sphere2 = ScreenObject("sphere",[Position3f(2,0,2),Position3f(1,30,30)])
       window.load_sphere(sphere2)
+	  
+      sphere3 = ScreenObject("sphere",[Position3f(2,7,5),Position3f(1,30,30)])
+      window.load_sphere(sphere3)
+	  
+
 
       # load the bounds shape into the window so it is being drawn
       window.load_object(bounds)

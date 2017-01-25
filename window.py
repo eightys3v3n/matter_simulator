@@ -226,3 +226,7 @@ class Window(Window):
     glColor3f(0.0,0.0,255.0)
     self.spheres[2].draw()
     self.spheres[2].position.x += .01
+    
+    glColor3f(0.0,0.0,255.0)
+    self.spheres[3].draw()
+    self.spheres[3].position.x += .02
