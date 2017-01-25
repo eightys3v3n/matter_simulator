@@ -19,6 +19,8 @@ class ScreenObject:
     self.colour = colour
     self.max_points = 0
     self.gl_mode = None
+    self.vertices = []
+    self.vertices_colour = []
 
     if o_type == "point":
       self.type = "point"
@@ -73,15 +75,15 @@ class ScreenObject:
       raise Exception("expected a Position3f object",type(point))
 
     if len(self.vertices) >= self.max_points:
-      print("can't add a second point to a point object")
+      print("can't add a more points to '"+self.type+"' object which has a maximum of "+str(self.max_points)+" points")
     else:
       self.vertices.append(point)
-      self.colour.append(variables.default_colour)
+      self.colour_vertices.append(self.colour)
 
 
   def add_points(self,points):
     if not isinstance(points,(list,tuple,Position3f)):
-      raise Exception("expected an array of Position3f objects",type(points))
+      raise Exception("expected a tuple of Position3f objects",type(points))
 
     for point in points:
       self.add_point(point)
@@ -112,3 +114,5 @@ class ScreenObject:
       glTranslatef(self.position.x,self.position.y,self.position.z)
       gluSphere(sphere,int(self.sphere_args.x),int(self.sphere_args.y),int(self.sphere_args.z))
       glTranslatef(-self.position.x,-self.position.y,-self.position.z)
+    else:
+      raise Exception("can currently only use ScreenObject.draw for spheres")
