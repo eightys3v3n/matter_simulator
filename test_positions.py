@@ -117,7 +117,7 @@ def Position3f_Test():
 
   a = space.Position3f(0,0,0)
   b = space.Position3f(2,2,2)
-  if a.displacement(b) != space.Position3f(2,2,2):
+  if a.displacement(b) != space.Vector3f(Position3f(2,2,2)):
     print("displacement is incorrect 2,2,2",a.displacement(b))
     return True
 
