@@ -13,7 +13,7 @@ class Vector3f:
     mag = pow(self.destination.x - self.origin.x,2)
     mag += pow(self.destination.y - self.origin.y,2)
     mag += pow(self.destination.z - self.origin.z,2)
-    mag = sqrt(mag)
+    mag = pow(mag,.5)
     return mag
 
 
@@ -24,8 +24,15 @@ class Vector3f:
     d.destination.y = self.destination.y - self.origin.y
     d.destination.z = self.destination.z - self.origin.z
     return d
+	
 
-
+  def __str__(self):
+    array = []
+    array.append(self.destination.x - self.origin.x)
+    array.append(self.destination.y - self.origin.y)
+    array.append(self.destination.z - self.origin.z)
+    return array.__str__()
+  
   @property
   def angles(self):
     x = self.direction.x - self.origin.x
@@ -51,7 +58,12 @@ class Vector3f:
 
 
 def main():
-
+	L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))
+	h=L.direction
+	print(h)
+	k=L.magnitude
+	print(k)
+	input("does this look right")
 
 
 if __name__ == "__main__":
