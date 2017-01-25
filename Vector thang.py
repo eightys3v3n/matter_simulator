@@ -3,14 +3,14 @@ from vectors import Vector3f
 from position import Position3f
 
 v1 = Vector3f(Position3f(21,23,9))
-vector1 = v1.direction
+
 v2 = Vector3f(Position3f(9,1,5))
-vector2 = v2.direction
+
 
 m=0
 k=0
 
-vectors=[vector1,vector2]
+vectors=[v1,v2]
 x=vectors[k]
 y=vectors[m]
 for x in vectors:
