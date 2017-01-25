@@ -26,13 +26,6 @@ class Vector3f:
     return d
 
 
-  def __str__(self):
-    array = []
-    array.append(self.destination.x - self.origin.x)
-    array.append(self.destination.y - self.origin.y)
-    array.append(self.destination.z - self.origin.z)
-    return array.__str__()
-
   @property
   def angles(self):
     x = self.direction.x - self.origin.x
@@ -55,6 +48,20 @@ class Vector3f:
     elif self.direction != other.direction:
       return False
     return True
+
+
+  def __sub__(self,other):
+    new = Vector3f()
+
+    if self.origin != Position3f():
+      cur = self.direction()
+
+    if self.origin != Position3f():
+      oth = other.origin()
+
+    new.destination = cur - oth
+    return new
+
 
   def __str__(self):
     array = []
