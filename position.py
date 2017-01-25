@@ -168,6 +168,14 @@ class Position3f:
     self.z += other.z
 
 
+  def __sub__(self,other):
+    new = Position3f()
+    new.x = self.x - other.x
+    new.y = self.y - other.y
+    new.z = self.z - other.z
+    return new
+
+
   def __mul__(self,other):
     if isinstance(other,Position3f):
       return Position3f(self.x*other.x,self.y*other.y,self.z*other.z)
