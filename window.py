@@ -133,9 +133,9 @@ class Window(Window):
   # called when one scrolls the mouse wheel
   def on_mouse_scroll(self,x,y,scroll_x,scroll_y):
     if scroll_y < 0:
-      variables.move_speed *= 0.9
+      variables.move_speed *= Position3f(0.9,0.9,0.9)
     elif scroll_y > 0:
-      variables.move_speed *= 1.1
+      variables.move_speed *= Position3f(1.1,1.1,1.1)
       #print("scrolling top of mouse wheel up")
 
 

@@ -1,3 +1,4 @@
+import copy
 import variables
 from screen_object import ScreenObject
 from space import Position3f,Vector3f
@@ -13,8 +14,8 @@ class Particle:
     self.mass = mass
     self.density = density
     self.position = Position3f()
-    self.velocity = Vector3f()
-    self.acceleration = Vector3f()
+    self.velocity = Vector3f(Position3f(0,0,0))
+    self.acceleration = Vector3f(Position3f(0,0,0))
 
 
   # returns the radius as calculated by mass and density
@@ -29,12 +30,13 @@ class Particle:
   def update(self):
 
 
+    print("acceleration   ",self.acceleration)
+    print("velocity       ",self.velocity)
+
     # PROBLEM LINE
     self.velocity += self.acceleration
 
-
-    print("acceleration",self.acceleration)
-    print("new velocity",self.velocity)
+    #print("new velocity",self.velocity)
     self.position += self.velocity.direction.destination
 
 

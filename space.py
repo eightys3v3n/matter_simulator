@@ -94,7 +94,7 @@ class Position2f:
 
 
 class Position3f:
-  def __init__(self,x=0.0,y=0.0,z=0.0):
+  def __init__(self,x=0,y=0,z=0):
     self.x = float(x)
     self.y = float(y)
     self.z = float(z)
@@ -300,6 +300,9 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't add Vector3f and",other)
 
+    print("   self",self)
+    print("   other",other)
+
     new = Vector3f()
     own_zero_origin = self.destination
     other_zero_origin = other.destination
@@ -316,10 +319,18 @@ class Vector3f:
 
   def __str__(self):
     array = []
-    array.append(self.destination.x - self.origin.x)
-    array.append(self.destination.y - self.origin.y)
-    array.append(self.destination.z - self.origin.z)
+    array.append(self.origin.x)
+    array.append(self.origin.y)
+    array.append(self.origin.z)
+    string = array.__str__()
+    array.append(self.destination.x)
+    array.append(self.destination.y)
+    array.append(self.destination.z)
     return array.__str__()
+
+
+  def __repr__(self):
+    return self.__str__()
 
 
 def main():

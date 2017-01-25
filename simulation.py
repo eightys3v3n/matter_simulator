@@ -27,11 +27,12 @@ class Simulation:
       self.screen_objects[i].update_from_particle(self.particles[i])
 
 
-
   def new_particle(self):
     particle = Particle()
     particle.position = Random3f([-5,5],[-5,5],[-5,5])
     particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
+    #particle.acceleration = space.Vector3f()
+    #particle.acceleration = space.Vector3f(space.Position3f(0,0,0),space.Position3f(0,0,0))
 
     self.particles.append(particle)
 
