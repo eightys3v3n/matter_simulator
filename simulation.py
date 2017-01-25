@@ -23,7 +23,13 @@ class Simulation:
 
   def update(self,last_call_time):
     for i in range(len(self.particles)):
+
+      # do gravity here
+      #gravity(particles)
+
+      # move the particle
       self.particles[i].update()
+      # update the shape on screen
       self.screen_objects[i].update_from_particle(self.particles[i])
 
 
