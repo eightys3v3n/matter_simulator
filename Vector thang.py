@@ -2,9 +2,9 @@ n=2
 from vectors import Vector3f
 from position import Position3f
 
-v1 = Vector3f(Position3f(21,23,9),Position3f(0,0,0))
+v1 = Vector3f(Position3f(21,23,9))
 vector1 = v1.direction
-v2 = Vector3f(Position3f(9,1,5),Position3f(0,0,0))
+v2 = Vector3f(Position3f(9,1,5))
 vector2 = v2.direction
 
 m=0
