@@ -27,7 +27,7 @@ class Particle:
 
   # will be called every frame to move the particle
   def update(self):
-    self.velocity += self.acceleration
+    self.velocity += self.acceleration #make sure that this is actually acceleration * time
     self.position += self.velocity
 
 
