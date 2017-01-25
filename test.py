@@ -91,7 +91,7 @@ def compile_tests(module):
 
     if isinstance(function,ModuleType):
       compile_tests(function)
-    elif callable(function):
+    elif callable(function) and len(function_str) > 5 and function_str[-5:] == "_Test":
       requirements = getattr(module,function_str+"_req")
       tests.new(function,requirements)
 
