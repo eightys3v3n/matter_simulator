@@ -60,10 +60,10 @@ class Window(Window):
     glDepthFunc(GL_LESS)
 
     # don't draw stuff you can't see anyways
-    glEnable(GL_CULL_FACE)
+    #glEnable(GL_CULL_FACE)
 
     # don't draw stuff that is behind something else
-    glCullFace(GL_BACK)
+    #glCullFace(GL_BACK)
 
     # when looking at a square you are drawing, the "front" of the 2d square is the side
     # that your looking at when you draw the cube counter-clock-wise
@@ -75,6 +75,8 @@ class Window(Window):
     self.view = View()
 
     self.mouse_locked = False
+
+    self.spheres = []
 
   # called when the window closes, used to stop threads and stuff
   def quit(self):
@@ -174,6 +176,10 @@ class Window(Window):
       self.batch.add_indexed(len(obj.vertices),obj.gl_mode,None,obj.gl_order,obj.gl_vertices)
 
 
+  def load_sphere(self,sphere):
+    self.spheres.append(sphere)
+
+
   # clear all things being drawn and instead draw all the objects in the array
   # 'objects' every frame
   def reload_objects(self,objects):
@@ -202,9 +208,11 @@ class Window(Window):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    sphere = gluNewQuadric()
-    gluSphere(sphere,10,100,20)
+    #sphere = gluNewQuadric()
+    #gluSphere(sphere,10,100,20)
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
     glColor3f(175.0,175.0,175.0)
     self.batch.draw()
+    for sphere in self.spheres:
+      sphere.draw()

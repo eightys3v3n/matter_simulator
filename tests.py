@@ -11,6 +11,7 @@ import materials,space,screen_object,utils,view
 
 # stores all the tests names and which other tests they require to be run first
 # as well as which tests have been completed already
+global tests
 tests = Tests()
 
 

@@ -1,4 +1,5 @@
 from pyglet.gl import GL_POINTS,GL_QUADS
+from pyglet.gl import gluNewQuadric,gluSphere
 from space import Position3f
 import variables
 
@@ -109,3 +110,9 @@ class ScreenObject:
       self.add_point(Position3f(pos.x-size.x/2,pos.y+size.y/2,pos.z))
       self.add_point(Position3f(pos.x+size.x/2,pos.y+size.y/2,pos.z))
       self.add_point(Position3f(pos.x+size.x/2,pos.y-size.y/2,pos.z))
+
+
+  def draw(self):
+    if self.type == "sphere":
+      sphere = gluNewQuadric()
+      gluSphere(sphere,10,100,20)
