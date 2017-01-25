@@ -38,6 +38,11 @@ class ScreenObject:
       self.type = o_type
       self.gl_mode = GL_QUADS
       self.max_points = 24
+
+    elif o_type == "circle":
+      self.type = o_type
+      self.gl_mode = GL_TRIANGLE_STRIP
+
     else:
       raise Exception("unknown object type",o_type)
 
@@ -83,7 +88,6 @@ class ScreenObject:
 
 
   def rectangle_at(self,pos,size):
-
     if size.x == 0:
       self.add_point(Position3f(pos.x,pos.y-size.y/2,pos.z-size.z/2))
       self.add_point(Position3f(pos.x,pos.y+size.y/2,pos.z-size.z/2))
