@@ -52,6 +52,8 @@ class Vector3f:
 
   def __sub__(self,other):
     new = Vector3f()
+    cur = self.destination
+    oth = other.destination
 
     if self.origin != Position3f():
       cur = self.direction()
