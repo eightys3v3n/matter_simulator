@@ -15,7 +15,6 @@ class Particle:
     self.position = Position3f()
     self.velocity = Vector3f()
     self.acceleration = Vector3f()
-    self.velocity = 10
 
 
   # returns the radius as calculated by mass and density

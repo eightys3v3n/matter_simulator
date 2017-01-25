@@ -128,14 +128,14 @@ class Position3f:
 
   def __add__(self,other):
     if not isinstance(other,Position3f):
-      raise Exception("can't add Position3f and",type(other))
+      raise Exception("can't add Position3f and",other)
     return Position3f(self.x+other.x,self.y+other.y,self.z+other.z)
 
 
   # when doing a += b self is a and other is b
   def __radd__(self,other):
     if not isinstance(other,Position3f):
-      raise Exception("can't add Position3f and",type(other))
+      raise Exception("can't add Position3f and",other)
 
     self.x += other.x
     self.y += other.y
@@ -143,6 +143,9 @@ class Position3f:
 
 
   def __sub__(self,other):
+    if not isinstance(other,Position3f):
+      raise Exception("can't add Position3f and",other)
+
     new = Position3f()
     new.x = self.x - other.x
     new.y = self.y - other.y
@@ -151,6 +154,9 @@ class Position3f:
 
 
   def __mul__(self,other):
+    if not isinstance(other,Position3f):
+      raise Exception("can't add Position3f and",other)
+
     if isinstance(other,Position3f):
       return Position3f(self.x*other.x,self.y*other.y,self.z*other.z)
     elif isinstance(other,float):
@@ -160,6 +166,9 @@ class Position3f:
 
 
   def __rmul__(self,other):
+    if not isinstance(other,Position3f):
+      raise Exception("can't add Position3f and",other)
+
     if isinstance(other,Position3f):
       self.x *= other.x
       self.y *= other.y
@@ -259,6 +268,9 @@ class Vector3f:
 
 
   def __eq__(self,other):
+    if not isinstance(other,Vector3f):
+      raise Exception("can't add Vector3f and",other)
+
     if self.origin != other.origin:
       return False
     elif self.destination != other.destination:
@@ -267,6 +279,9 @@ class Vector3f:
 
 
   def __sub__(self,other):
+    if not isinstance(other,Vector3f):
+      raise Exception("can't add Vector3f and",other)
+
     new = Vector3f()
     own_zero_origin = self.destination
     other_zero_origin = other.destination
@@ -282,6 +297,9 @@ class Vector3f:
 
 
   def __add__(self,other):
+    if not isinstance(other,Vector3f):
+      raise Exception("can't add Vector3f and",other)
+
     new = Vector3f()
     own_zero_origin = self.destination
     other_zero_origin = other.destination
