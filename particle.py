@@ -30,8 +30,8 @@ class Particle:
   def update(self):
 
 
-    print("acceleration   ",self.acceleration)
-    print("velocity       ",self.velocity)
+    #print("acceleration   ",self.acceleration)
+    #print("velocity       ",self.velocity)
 
     # PROBLEM LINE
     self.velocity += self.acceleration

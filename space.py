@@ -300,8 +300,8 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't add Vector3f and",other)
 
-    print("   self",self)
-    print("   other",other)
+    #print("   self",self)
+    #print("   other",other)
 
     new = Vector3f()
     own_zero_origin = self.destination
