@@ -16,6 +16,7 @@ class Particle:
     self.acceleration = Vector3f()
 
 
+  # returns the radius as calculated by mass and density
   @property
   def radius(self):
     v = self.mass * self.density
@@ -23,6 +24,26 @@ class Particle:
     return r
 
 
+  # will be called every frame to move the particle
   def update(self):
     self.velocity += self.acceleration
     self.position += self.velocity
+
+
+  def __eq__(self,other):
+    if self.mass != other.mass:
+      return False
+
+    if self.density != other.density:
+      return False
+
+    if self.position != other.position:
+      return False
+
+    if self.velocity != other.velocity:
+      return False
+
+    if self.acceleration != other.acceleration:
+      return False
+
+    return True
