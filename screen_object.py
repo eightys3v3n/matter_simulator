@@ -122,4 +122,4 @@ class ScreenObject:
       sphere = gluNewQuadric()
       glTranslatef(self.position.x,self.position.y,self.position.z)
       gluSphere(sphere,int(self.sphere_args.x),int(self.sphere_args.y),int(self.sphere_args.z))
-      self.position.x += .01
+      glTranslatef(-self.position.x,-self.position.y,-self.position.z)
