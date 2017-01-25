@@ -1,4 +1,4 @@
-from position import Position3f,Position2f
+from space import Position3f,Position2f
 
 
 # Variables File
@@ -22,3 +22,7 @@ default_colour = [175.0,175.0,175.0] # RGB
 # controls
 move_speed = Position3f(0.1,0.1,0.1)
 mouse_sensitivity = Position2f(0.5,0.5)
+
+
+
+default_sphere_args = [1,30,30]

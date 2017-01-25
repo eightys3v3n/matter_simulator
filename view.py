@@ -1,6 +1,6 @@
 from pyglet.gl import gluPerspective,glRotatef,glTranslatef
 from math import hypot,cos,sin,tan,acos,atan,asin,radians,degrees,atan2
-from position import Position3f,Position2f
+from space import Position3f,Position2f
 import variables
 
 

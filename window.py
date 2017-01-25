@@ -6,9 +6,9 @@ from pyglet.window import mouse
 from pyglet.clock import schedule_interval
 from pyglet.clock import set_fps_limit
 from pyglet.gl import *
-from position import Position3f,Position2f
+from space import Position3f,Position2f
 from view import View
-import variables,screen_object,position
+import variables,screen_object,space
 
 
 # Window File
@@ -215,14 +215,6 @@ class Window(Window):
     glColor3f(175.0,175.0,175.0)
     self.batch.draw()
 
-    glColor3f(255.0,0.0,0.0)
-    self.spheres[0].draw()
-    self.spheres[0].position.x += .01
-
-    glColor3f(0.0,255.0,0.0)
-    self.spheres[1].draw()
-    self.spheres[1].position.x += .01
-
-    glColor3f(0.0,0.0,255.0)
-    self.spheres[2].draw()
-    self.spheres[2].position.x += .01
+    for sphere in self.spheres:
+      sphere.draw()
+      sphere.position.x += 0.01
