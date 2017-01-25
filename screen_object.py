@@ -12,7 +12,7 @@ import variables
 class ScreenObject:
   def __init__(self,o_type,position=[]):
     self.position = Position3f()
-    self.sphere_args = Position3f()
+    self.sphere_args = [0,0,0]
     self.vertices = []
     self.colour = []
     self.type = None
@@ -121,5 +121,5 @@ class ScreenObject:
     if self.type == "sphere":
       sphere = gluNewQuadric()
       glTranslatef(self.position.x,self.position.y,self.position.z)
-      gluSphere(sphere,10,100,20)
-      self.position.x += 1
+      gluSphere(sphere,int(self.sphere_args.x),int(self.sphere_args.y),int(self.sphere_args.z))
+      self.position.x += .01
