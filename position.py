@@ -194,8 +194,11 @@ class Position3f:
     if not isinstance(other,Position3f):
       raise Exception("can't calculate displacement between Position3f and",type(other))
 
-    d = Position3f()
-    d.x = other.x - self.x
-    d.y = other.y - self.y
-    d.z = other.z - self.z
+    d = Vector3f()
+    d.origin.x = self.x
+    d.origin.y = self.y
+    d.origin.z = self.z
+    d.destination.x = other.x
+    d.destination.y = other.y
+    d.destination.z = other.z
     return d

@@ -4,7 +4,7 @@ from position import Position3f
 class Vector3f:
   def __init__(self,destination=Position3f(),origin=Position3f()):
     self.origin = origin
-    self.direction = direction
+    self.destination = destination
 
 
   @property
@@ -15,6 +15,15 @@ class Vector3f:
     mag += pow(self.destination.z - self.origin.z,2)
     mag = sqrt(mag)
     return mag
+
+
+  @property
+  def direction(self):
+    d = Vector3f()
+    d.destination.x = self.destination.x - self.origin.x
+    d.destination.y = self.destination.y - self.origin.y
+    d.destination.z = self.destination.z - self.origin.z
+    return d
 
 
   @property

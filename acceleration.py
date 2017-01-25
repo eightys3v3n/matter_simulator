@@ -19,6 +19,7 @@ def gravitaitonal_Fields(mass, s , s_m):
 	a.append(a3)
 	return a
 
+
 mass = randint(1,700000000)
 s = [randint(0,50000),randint(0,50000),randint(0,50000)]
 s_m = (s[0]**2 +s[1]**2+s[2]**2)
@@ -31,4 +32,3 @@ input ("press enter to end")
 #for every frame:
 	#for all masses compared to all other masses:
 		#gravitaitonal_Fields(mass,s)
-
