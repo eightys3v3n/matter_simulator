@@ -13,7 +13,7 @@ if __name__ == "__main__":
     import variables
     from window import Window
     from screen_object import ScreenObject
-    from space import Position3f
+    from position import Position3f
 
     def main():
       # create a window

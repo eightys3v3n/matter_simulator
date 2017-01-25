@@ -1,6 +1,94 @@
 from math import hypot,cos,sin,tan,acos,atan,asin,degrees,radians
 
 
+class Position2f:
+  def __init__(self,x=0.0,y=0.0,angle=None):
+    x = float(x)
+    y = float(y)
+
+    if angle == None:
+      self.x = x
+      self.y = y
+    else:
+      angle = float(angle)
+      self.x = cos(radians(angle))
+      self.y = sin(radians(angle))
+      self.x = round(self.x,6)
+      self.y = round(self.y,6)
+
+
+  def __getattr__(self,key):
+    if key == "array":
+      return (self.x,self.y)
+    elif key == "angle":
+      angle = 0
+      if self.x:
+        angle = degrees(atan(self.y/self.x))
+        angle = round(angle,6)
+      elif self.y:
+        angle = degrees(asin(self.y))
+        angle = round(angle,6)
+      return angle
+
+
+  def __str__(self):
+    return "("+str(self.x)+","+str(self.y)+")"
+
+
+  def __eq__(self,other):
+    if not isinstance(other,Position2f):
+      return False
+
+    if self.x != other.x:
+      return False
+    if self.y != other.y:
+      return False
+    return True
+
+
+  def __add__(self,other):
+    if not isinstance(other,Position2f):
+      raise Exception("can't add Position2f and",type(other))
+    return Position2f(self.x+other.x,self.y+other.y)
+
+
+  def __radd__(self,other):
+    if not isinstance(other,Position2f):
+      raise Exception("can't add Position2f and",type(other))
+    self.x += other.x
+    self.y += other.y
+
+
+  def __mul__(self,other):
+    if isinstance(other,Position2f):
+      return Position2f(self.x*other.x,self.y*other.y)
+    elif isinstance(other,float):
+      return Position2f(self.x*other,self.y*other)
+    else:
+      raise Exception("can't multiple Position2f and",type(other))
+
+
+  def __rmul__(self,other):
+    if isinstance(other,Position2f):
+      self.x *= other.x
+      self.y *= other.y
+    elif isinstance(other,float):
+      self.x *= other
+      self.y *= other
+    else:
+      raise Exception("can't multiple Position2f and",type(other))
+
+
+  def displacement(self,other):
+    if not isinstance(other,Position2f):
+      raise Exception("can't calculate displacement between Position2f and",type(other))
+
+    d = Position2f()
+    d.x = other.x - self.x
+    d.y = other.y - self.y
+    return d
+
+
 class Position3f:
   def __init__(self,x=0.0,y=0.0,z=0.0,angles=None):
     x = float(x)

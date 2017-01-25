@@ -6,9 +6,9 @@ from pyglet.window import mouse
 from pyglet.clock import schedule_interval
 from pyglet.clock import set_fps_limit
 from pyglet.gl import *
-from space import Position3f,Position2f
+from position import Position3f,Position2f
 from view import View
-import variables,screen_object,space
+import variables,screen_object,position
 
 
 # Window File
@@ -30,7 +30,7 @@ class Window(Window):
     super(Window,self).__init__()
 
     # initialize the window
-    self.set_size(variables.screen_size.x,variables.screen_size.y)
+    self.set_size(int(variables.screen_size.x),int(variables.screen_size.y))
 
     # to or not to lock the mouse inside this window (true is like minecraft, false is a normal window)
     self.set_exclusive_mouse(False)

@@ -1,6 +1,6 @@
 from pyglet.gl import GL_POINTS,GL_QUADS
 from pyglet.gl import gluNewQuadric,gluSphere,glTranslatef
-from space import Position3f
+from position import Position3f
 import variables
 
 

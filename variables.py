@@ -1,4 +1,4 @@
-from space import Position2i,Position3f,Position2f
+from position import Position3f,Position2f
 
 
 # Variables File
@@ -8,7 +8,7 @@ from space import Position2i,Position3f,Position2f
 
 
 # window stuff
-screen_size = Position2i(800,600)
+screen_size = Position2f(800,600)
 
 
 # constants
