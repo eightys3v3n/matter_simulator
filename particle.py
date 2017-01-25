@@ -1,5 +1,6 @@
 import variables
-from space import Vector3f,Position3f
+from position import Position3f
+from vectors import Vector3f
 
 
 # Particle File

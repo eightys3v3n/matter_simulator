@@ -1,4 +1,6 @@
 from sys import exit
+from types import ModuleType
+import test_files
 
 
 # Test File
@@ -67,3 +69,24 @@ class Tests():
   def __call__(self):
     for test in self.tests:
       self.run_test(test)
+
+
+tests = Tests()
+
+
+def compile_tests(module):
+  # runs every function in the tests file
+  for function_str in dir(module):
+    function = getattr(module,function_str)
+
+    if isinstance(function,ModuleType):
+      compile_tests(function)
+    elif callable(function):
+      requirements = getattr(module,function_str+"_req")
+      tests.new(function,requirements)
+
+
+
+def test_all():
+  compile_tests(test_files)
+  tests()

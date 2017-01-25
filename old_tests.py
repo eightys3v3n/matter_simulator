@@ -1,17 +1,13 @@
 from test import Tests
 from time import sleep
-from space import Position2f,Position3f
-import materials,space,screen_object,utils,view
+from position import Position2f,Position3f
+import particle,position,screen_object,utils,view
 
 
-# Tests File
-# this file is filled with all the tests for everything.
-# running the tests() object will run all the tests
 
 
-# stores all the tests names and which other tests they require to be run first
-# as well as which tests have been completed already
-tests = Tests()
+
+
 
 
 def Map():

@@ -4,8 +4,8 @@ from sys import argv,exit
 if __name__ == "__main__":
   if len(argv) > 1:
     if str(argv[1]) == "test":
-      import tests
-      exit(tests.tests())
+      import test
+      exit(test.test_all())
 
   else:
     from pyglet.app import run

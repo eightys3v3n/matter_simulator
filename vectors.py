@@ -50,8 +50,17 @@ class Vector3f:
     return True
 
 
-def main():
+  def __str__(self):
+    array = []
+    array.append(self.destination.x - self.origin.x)
+    array.append(self.destination.y - self.origin.y)
+    array.append(self.destination.z - self.origin.z)
+    return array.__str__()
 
+
+
+def main():
+  pass
 
 
 if __name__ == "__main__":
