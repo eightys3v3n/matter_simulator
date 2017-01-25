@@ -1,5 +1,6 @@
 from position import Position3f
 
+
 class Vector3f:
   def __init__(self,destination=Position3f(),origin=Position3f()):
     self.origin = origin
@@ -38,3 +39,11 @@ class Vector3f:
     elif self.direction != other.direction:
       return False
     return True
+
+
+def main():
+
+
+
+if __name__ == "__main__":
+  main()
