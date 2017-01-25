@@ -1,5 +1,5 @@
 from pyglet.gl import GL_POINTS,GL_QUADS
-from pyglet.gl import gluNewQuadric,gluSphere
+from pyglet.gl import gluNewQuadric,gluSphere,glTranslatef
 from space import Position3f
 import variables
 
@@ -11,6 +11,8 @@ import variables
 
 class ScreenObject:
   def __init__(self,o_type,position=[]):
+    self.position = Position3f()
+    self.sphere_args = Position3f()
     self.vertices = []
     self.colour = []
     self.type = None
@@ -45,10 +47,13 @@ class ScreenObject:
     elif o_type == "sphere":
       self.type = o_type
       self.gl_mode = None
-      self.max_points = 3
+      self.max_points = 2
 
-      if len(position) != 3:
-        raise Exception("a sphere can only be initialized with 3 Position3f",position)
+      if len(position) != 2:
+        raise Exception("a sphere can only be initialized with 2 Position3f",position)
+
+      self.position = position[0]
+      self.sphere_args = position[1]
 
     else:
       raise Exception("unknown object type",o_type)
@@ -115,4 +120,6 @@ class ScreenObject:
   def draw(self):
     if self.type == "sphere":
       sphere = gluNewQuadric()
+      glTranslatef(self.position.x,self.position.y,self.position.z)
       gluSphere(sphere,10,100,20)
+      self.position.x += 1
