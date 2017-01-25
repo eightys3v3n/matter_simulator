@@ -1,5 +1,5 @@
 import test_positions
-import vectors,position
+import space
 
 
 def Equal_Test():
