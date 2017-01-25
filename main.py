@@ -22,13 +22,13 @@ if __name__ == "__main__":
       # create a shape that will draw lines around the simulation boundries
       bounds = ScreenObject("rectangle",[Position3f(0,0,-4),Position3f(10,10,0)])
 
-      sphere = ScreenObject("sphere",[Position3f(0,0,0),Position3f(1,100,100)])
+      sphere = ScreenObject("sphere",[Position3f(0,0,0),Position3f(1,30,30)])
       window.load_sphere(sphere)
 
-      sphere1 = ScreenObject("sphere",[Position3f(2,2,0),Position3f(1,100,100)])
+      sphere1 = ScreenObject("sphere",[Position3f(2,2,0),Position3f(1,30,30)])
       window.load_sphere(sphere1)
 
-      sphere2 = ScreenObject("sphere",[Position3f(2,0,2),Position3f(1,100,100)])
+      sphere2 = ScreenObject("sphere",[Position3f(2,0,2),Position3f(1,30,30)])
       window.load_sphere(sphere2)
 
       # load the bounds shape into the window so it is being drawn

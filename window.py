@@ -211,8 +211,15 @@ class Window(Window):
     #sphere = gluNewQuadric()
     #gluSphere(sphere,10,100,20)
 
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
     glColor3f(175.0,175.0,175.0)
     self.batch.draw()
-    for sphere in self.spheres:
-      sphere.draw()
+
+    glColor3f(255.0,0.0,0.0)
+    self.spheres[0].draw()
+
+    glColor3f(0.0,255.0,0.0)
+    self.spheres[1].draw()
+
+    glColor3f(0.0,0.0,255.0)
+    self.spheres[2].draw()
