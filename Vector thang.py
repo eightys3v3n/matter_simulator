@@ -1,4 +1,5 @@
-n=2
+n=2 #number of unique particles
+
 from vectors import Vector3f
 from position import Position3f
 
@@ -10,7 +11,9 @@ v2 = Vector3f(Position3f(9,1,5))
 m=0
 k=0
 
-vectors=[v1,v2]
+vectors=[]
+vectors.append(v1)
+vectors.append(v2)
 x=vectors[k]
 y=vectors[m]
 for x in vectors:

@@ -21,13 +21,13 @@ class Particle:
   @property
   def radius(self):
     v = self.mass * self.density
-    r = pow(4.0/3.0 * variables.pi * v,1.0/3.0)
+    r = pow((3.0/(4.0 * variables.pi)) * v,1.0/3.0)
     return r
 
 
   # will be called every frame to move the particle
   def update(self):
-    self.velocity += self.acceleration
+    self.velocity += self.acceleration #make sure that this is actually acceleration * time
     self.position += self.velocity
 
 
