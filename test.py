@@ -1,3 +1,4 @@
+import os
 from sys import exit
 from types import ModuleType
 import test_files
@@ -57,12 +58,21 @@ class Tests():
 
     ret = test()
     if ret == False:
-      print("\033[92m"+test.name+" passed\033[0m")
+      if os.name == "posix":
+        print("\033[92m"+test.name+" passed\033[0m")
+      elif os.name == "nt":
+        print(test.name+" passed")
       test.completed = True
     elif ret == None:
-      print("\033[90m"+test.name+" has no test\033[0m")
+      if os.name == "posix":
+        print("\033[90m"+test.name+" has no test\033[0m")
+      elif os.name == "nt":
+        print(test.name+" has no test")
     else:
-      print("\033[91m"+test.name+" failed\033[0m")
+      if os.name == "posix":
+        print("\033[91m"+test.name+" failed\033[0m")
+      elif os.name == "nt":
+        print(test.name+" failed")
       exit(2)
 
 
