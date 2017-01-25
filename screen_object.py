@@ -26,6 +26,7 @@ class ScreenObject:
         raise Exception("a point can only be initialized with 1 Position3f",position)
 
       self.add_point(position[0])
+
     elif o_type == "rectangle":
       self.type = o_type
       self.gl_mode = GL_QUADS
@@ -34,14 +35,19 @@ class ScreenObject:
       if len(position) != 2:
         raise Exception("a rectangle can only be initialized with 2 Position3f",position)
       self.rectangle_at(position[0],position[1])
+
     elif o_type == "cube":
       self.type = o_type
       self.gl_mode = GL_QUADS
       self.max_points = 24
 
-    elif o_type == "circle":
+    elif o_type == "sphere":
       self.type = o_type
-      self.gl_mode = GL_TRIANGLE_STRIP
+      self.gl_mode = None
+      self.max_points = 3
+
+      if len(position) != 3:
+        raise Exception("a sphere can only be initialized with 3 Position3f",position)
 
     else:
       raise Exception("unknown object type",o_type)

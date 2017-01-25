@@ -203,7 +203,7 @@ class Window(Window):
     glLoadIdentity()
 
     sphere = gluNewQuadric()
-    gluSphere(sphere,25,100,20)
+    gluSphere(sphere,10,100,20)
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
     glColor3f(175.0,175.0,175.0)
