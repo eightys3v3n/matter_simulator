@@ -60,10 +60,10 @@ class Window(Window):
     glDepthFunc(GL_LESS)
 
     # don't draw stuff you can't see anyways
-    #glEnable(GL_CULL_FACE)
+    glEnable(GL_CULL_FACE)
 
     # don't draw stuff that is behind something else
-    #glCullFace(GL_BACK)
+    glCullFace(GL_BACK)
 
     # when looking at a square you are drawing, the "front" of the 2d square is the side
     # that your looking at when you draw the cube counter-clock-wise
