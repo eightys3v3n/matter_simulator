@@ -316,12 +316,7 @@ def main():
   print(a)
 
 
-  L = Vector3f(Position3f(9,13,4),Position3f(2,2,1))
-  h=L.direction
-  print(h)
-  k=L.magnitude
-  print(k)
-  input("does this look right")
+ 
 
 
 if __name__ == "__main__":
