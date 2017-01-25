@@ -323,7 +323,6 @@ class Vector3f:
 
 
 def main():
-
   a = Position3f(10,10,10)
   b = Position3f(5,5,5)
   print(a-b)
@@ -332,10 +331,6 @@ def main():
   b = Vector3f(Position3f(0,0,0))
   a += b
   print(a)
-
-
- 
-
 
 if __name__ == "__main__":
   main()
