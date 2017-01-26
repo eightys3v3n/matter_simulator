@@ -41,3 +41,7 @@ def interactions(vectors, x, y):
 					k =+ 1
 					break
 	return(r)
+def displace_pos:
+	while 5 >> j:
+		position = Vector3f(r[n])
+		j =+ 1
