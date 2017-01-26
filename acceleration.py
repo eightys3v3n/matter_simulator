@@ -5,19 +5,20 @@
 # G is the gravitational constant 6.67408 * (10**-11)
 #sum the fields of every particle on 1 particle to determine acceleration
 #then do this for every particle
-from random import randint
+from particle import Particle 
+from space import Postion3f, Vector3f
+import variables 
+from Vector thang import interactions
+r = interactions(vectors, x, y) 
+	n = 0
+for 5 > n:
+	position = Postion3f(r[n])
+	n =+ 1
 #s is just the vector and s_m can be replaced with the dot product
 #mass can be related to the particular particle
 #this function returns acceleration acting on particle B from A,it does not return force, to obtain force simply add all accelerations on B and multiply by Mass of B
-def gravitaitonal_Fields(mass, s , s_m):
-	a=[]
-	a1 = (((-6.67408 * (10**-11))*mass)/(s_m)) * (s[0]/s_m)
-	a.append(a1)
-	a2 = ((-6.67408 * (10**-11))*mass/(s_m)) * (s[1]/s_m)
-	a.append(a2)
-	a3 = ((-6.67408 * (10**-11))*mass/(s_m)) * (s[2]/s_m)
-	a.append(a3)
-	return a
+def gravitaitonal_Fields(self.mass, G, self.acceleration, position):
+	G*self.mass / dot.position.  
 
 
 
