@@ -5,7 +5,7 @@ from particle import Particle
 from screen_object import ScreenObject
 from window import Window
 from utils import Random3f
-import variables,space
+import variables,space,acceleration
 
 
 class Simulation:
@@ -19,6 +19,7 @@ class Simulation:
     self.new_particle()
 
     schedule_interval(self.update,variables.physics_update_time)
+    #print(acceleration.gravity_between_particles(self.particles[0],self.particles[1]))
 
 
   def update(self,last_call_time):

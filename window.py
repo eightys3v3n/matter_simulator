@@ -31,7 +31,7 @@ class Window(Window):
     super(Window,self).__init__()
 
     # initialize the window
-    self.set_size(int(variables.screen_size.x),int(variables.screen_size.y))
+    self.set_size(int(variables.screen_size[0]),int(variables.screen_size[1]))
 
     # to or not to lock the mouse inside this window (true is like minecraft, false is a normal window)
     self.set_exclusive_mouse(False)
@@ -103,17 +103,17 @@ class Window(Window):
   def check_user_input(self):
     view_position = Position3f()
     if self.keys[key.LEFT] or self.keys[key.A]:
-      view_position.x += variables.move_speed.x
+      view_position.x += variables.move_speed[0]
     if self.keys[key.RIGHT] or self.keys[key.D]:
-      view_position.x -= variables.move_speed.x
+      view_position.x -= variables.move_speed[0]
     if self.keys[key.SPACE]:
-      view_position.y -= variables.move_speed.y
+      view_position.y -= variables.move_speed[1]
     if self.keys[key.LSHIFT]:
-      view_position.y += variables.move_speed.y
+      view_position.y += variables.move_speed[1]
     if self.keys[key.UP] or self.keys[key.W]:
-      view_position.z += variables.move_speed.z
+      view_position.z += variables.move_speed[2]
     if self.keys[key.DOWN] or self.keys[key.S]:
-      view_position.z -= variables.move_speed.z
+      view_position.z -= variables.move_speed[2]
     if view_position != Position3f():
       self.view.move(position=view_position)
 
@@ -133,9 +133,13 @@ class Window(Window):
   # called when one scrolls the mouse wheel
   def on_mouse_scroll(self,x,y,scroll_x,scroll_y):
     if scroll_y < 0:
-      variables.move_speed *= Position3f(0.9,0.9,0.9)
+      variables.move_speed[0] *= 0.9
+      variables.move_speed[1] *= 0.9
+      variables.move_speed[2] *= 0.9
     elif scroll_y > 0:
-      variables.move_speed *= Position3f(1.1,1.1,1.1)
+      variables.move_speed[0] *= 1.1
+      variables.move_speed[1] *= 1.1
+      variables.move_speed[2] *= 1.1
       #print("scrolling top of mouse wheel up")
 
 
@@ -143,8 +147,8 @@ class Window(Window):
   def on_mouse_motion(self,x,y,dx,dy):
     if self.mouse_locked:
       view_angle = Position2f()
-      view_angle.x = -dy*variables.mouse_sensitivity.x
-      view_angle.y = dx*variables.mouse_sensitivity.y
+      view_angle.x = -dy*variables.mouse_sensitivity[0]
+      view_angle.y = dx*variables.mouse_sensitivity[1]
       self.view.look(view_angle)
 
 

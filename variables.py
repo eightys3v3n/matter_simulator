@@ -1,6 +1,3 @@
-from space import Position3f,Position2f
-
-
 # Variables File
 # a file to store constants and stuff so it is easy to change.
 # something like the gravity constant, or the size of the simulation space
@@ -8,7 +5,7 @@ from space import Position3f,Position2f
 
 
 # window stuff
-screen_size = Position2f(800,600)
+screen_size = [800,600]
 
 
 # constants
@@ -20,8 +17,8 @@ default_colour = [175.0,175.0,175.0] # RGB
 
 
 # controls
-move_speed = Position3f(1,1,1)
-mouse_sensitivity = Position2f(0.5,0.5)
+move_speed = [1,1,1]
+mouse_sensitivity = [0.5,0.5]
 
 
 # the default radius and such of spheres
@@ -33,3 +30,6 @@ physics_update_time = 1.0/60.0
 # max number of actions that the simulation or the window can queue up before it is told
 # to wait before inserting any more
 max_queue_size = 10
+
+# number of decimals that all calculations are rounded to
+precision = 6

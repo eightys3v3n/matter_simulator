@@ -20,13 +20,19 @@ def gravitaitonal_Fields(mass, s , s_m):
 	return a
 
 
-mass = randint(1,700000000)
-s = [randint(0,50000),randint(0,50000),randint(0,50000)]
-s_m = (s[0]**2 +s[1]**2+s[2]**2)
-a = gravitaitonal_Fields(mass,s,s_m)
-print (a)
 
-input ("press enter to end")
+def gravity_between_particles(p1,p2):
+	d = p1.position.displacement(p2.position)
+	gravitaitonal_Fields(p1.mass,d)
+
+
+#mass = randint(1,700000000)
+#s = [randint(0,50000),randint(0,50000),randint(0,50000)]
+#s_m = (s[0]**2 +s[1]**2+s[2]**2)
+#a = gravitaitonal_Fields(mass,s,s_m)
+#print (a)
+
+#input ("press enter to end")
 
 
 #for every frame:

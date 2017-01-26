@@ -1,4 +1,5 @@
-from math import degrees,hypot,atan,cos,sin,atan2,radians,asin,acos
+from math import degrees,hypot,atan,cos,sin,atan2,radians,asin,acos,sqrt
+import variables
 
 
 class Position2f:
@@ -203,12 +204,22 @@ class Vector3f:
 
   @property
   def magnitude(self):
+    d = self.direction.destination
     mag = 0.0
-    mag = pow(self.destination.x - self.origin.x,2)
-    mag += pow(self.destination.y - self.origin.y,2)
-    mag += pow(self.destination.z - self.origin.z,2)
-    mag = pow(mag,.5)
+    mag = sqrt(pow(d.x,2)+pow(d.y,2)+pow(d.z,2))
+    mag = round(mag,variables.precision)
     return mag
+
+
+  @magnitude.setter
+  def magnitude(self,v):
+    new = Position3f()
+    new.y = v*sin(radians(self.angles.x))
+    h = v*cos(radians(self.angles.x))
+    new.x = h*cos(radians(self.angles.y))
+    new.z = h*sin(radians(self.angles.y))
+    self.origin = Position3f()
+    self.destination = new
 
 
   @property

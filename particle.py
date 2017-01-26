@@ -26,6 +26,13 @@ class Particle:
     return r
 
 
+  def displacement(self,other):
+    new = Vector3f()
+    new.origin = self.position
+    new.destination = other.position
+    return new
+
+
   # will be called every frame to move the particle
   def update(self):
 
