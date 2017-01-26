@@ -2,6 +2,14 @@ from math import degrees,hypot,atan,cos,sin,atan2,radians,asin,acos,sqrt
 import variables
 
 
+# Space File
+# this file has the classes for measurments of things in space
+# so positions, vectors. they are named like so
+# capital letter first, then number of dimentions, then type
+# so Vector3f is a 3d vector with floats
+
+
+# a 2d position
 class Position2f:
   def __init__(self,x=0.0,y=0.0,angle=None):
     x = float(x)
@@ -18,6 +26,9 @@ class Position2f:
       self.y = round(self.y,6)
 
 
+  # basically just makes functions that are called without the ()
+  # needs to be replaced because it no longer ckmplains when
+  # you call something that doesn't exist
   def __getattr__(self,key):
     if key == "array":
       return (self.x,self.y)
@@ -94,6 +105,7 @@ class Position2f:
     return d
 
 
+# a 3d position
 class Position3f:
   def __init__(self,x=0,y=0,z=0):
     self.x = float(x)
@@ -196,6 +208,7 @@ class Position3f:
     return d
 
 
+# a 3d vector, ie two 3d positions
 class Vector3f:
   def __init__(self,destination=Position3f(),origin=Position3f()):
     self.origin = origin
@@ -344,6 +357,7 @@ class Vector3f:
     return self.__str__()
 
 
+# just a temparary test function
 def main():
   a = Position3f(10,10,10)
   b = Position3f(5,5,5)
