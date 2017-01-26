@@ -5,8 +5,8 @@ from space import Position3f,Vector3f
 
 
 # Particle File
-# this file is for all the functions and classes that store the information about materials
-# these materials will be what move around the screen in clumps (spheres)
+# this file is for all the functions and classes that store the information about particles
+# these particles will be what move around the screen in clumps (spheres)
 
 
 class Particle:
@@ -19,6 +19,7 @@ class Particle:
 
 
   # returns the radius as calculated by mass and density
+  # used like 'r = particle.radius'
   @property
   def radius(self):
     v = self.mass * self.density
@@ -26,6 +27,9 @@ class Particle:
     return r
 
 
+  # returns the vector for the displacement between two particles.
+  # basically 'a.displacement(b)' returns what you have to do to a
+  # to get to b
   def displacement(self,other):
     new = Vector3f()
     new.origin = self.position
@@ -33,20 +37,14 @@ class Particle:
     return new
 
 
-  # will be called every frame to move the particle
+  # is called every unit of time to move the particle according to it's
+  # velocity and acceleration
   def update(self):
-
-
-    #print("acceleration   ",self.acceleration)
-    #print("velocity       ",self.velocity)
-
-    # PROBLEM LINE
     self.velocity += self.acceleration
-
-    #print("new velocity",self.velocity)
     self.position += self.velocity.direction.destination
 
 
+  # when you use 'if a == b' it calls 'if a.__eq__(b)'
   def __eq__(self,other):
     if self.mass != other.mass:
       return False
