@@ -2,7 +2,7 @@ import copy
 import variables
 from screen_object import ScreenObject
 from space import Position3f,Vector3f
-
+from acceleration import gravitaitonal_Fields
 
 # Particle File
 # this file is for all the functions and classes that store the information about particles

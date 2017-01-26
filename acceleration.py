@@ -10,21 +10,20 @@ from space import Postion3f, Vector3f
 import variables 
 from Vector thang import interactions
 r = interactions(vectors, x, y) 
-	n = 0
+   n = 0
 for 5 > n:
-	position = Postion3f(r[n])
-	n =+ 1
+   position = Vector3f(r[n])
+   n =+ 1
 #s is just the vector and s_m can be replaced with the dot product
 #mass can be related to the particular particle
 #this function returns acceleration acting on particle B from A,it does not return force, to obtain force simply add all accelerations on B and multiply by Mass of B
 def gravitaitonal_Fields(self.mass, G, self.acceleration, position):
-	G*self.mass / dot.position.  
+  scalar = G*self.mass / dot.position(position)
+  unit_vector = Vector3f(Postion3f(1,1,1))
+  acceleration = unit_vector.scalar_mult
+  self.acceleration =+ acceleration
+  return self.acceleration
 
-
-
-def gravity_between_particles(p1,p2):
-	d = p1.position.displacement(p2.position)
-	gravitaitonal_Fields(p1.mass,d)
 
 
 #mass = randint(1,700000000)
