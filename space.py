@@ -1,17 +1,24 @@
 from math import degrees,hypot,atan,cos,sin,atan2,radians,asin,acos,sqrt
 import variables
 
-
-# Space File
-# this file has the classes for measurments of things in space
-# so positions, vectors. they are named like so
-# capital letter first, then number of dimentions, then type
-# so Vector3f is a 3d vector with floats
+"""
+Classes and to keep attributes of an object in space.
+"""
 
 
-# a 2d position
 class Position2f:
+  """
+  A coordinate in 2D space. Defined by x and y.
+  """
+  
   def __init__(self,x=0.0,y=0.0,angle=None):
+    """
+    Construct a new position object
+      optional param:x      the x value of the new object
+      optional param:y      the y value of the new object
+      optional param:angle  an angle which you desire the coordinates for
+        this will set x and y to the values for the given angle in a unit circle
+    """
     x = float(x)
     y = float(y)
 
@@ -25,33 +32,61 @@ class Position2f:
       self.x = round(self.x,6)
       self.y = round(self.y,6)
 
-
-  # basically just makes functions that are called without the ()
-  # needs to be replaced because it no longer ckmplains when
-  # you call something that doesn't exist
-  def __getattr__(self,key):
-    if key == "array":
-      return (self.x,self.y)
-    elif key == "angle":
-      angle = 0
-      if self.x:
-        angle = degrees(atan(self.y/self.x))
-        angle = round(angle,6)
-      elif self.y:
-        angle = degrees(asin(self.y))
-        angle = round(angle,6)
-      return angle
+  @property
+  def array(self):
+    """
+    returns: an array, [x,y], for this object
+    """
+    return [self.x,self.y]
+    
+    
+  @property
+  def angle(self):
+    """
+    returns: the angle of this position from (0,0)
+    The return angle is rounded to variables.precision digits
+    """
+    angle = 0
+    if self.x:
+      angle = degrees(atan(self.y/self.x))
+      angle = round(angle,variables.precision)
+    elif self.y:
+      angle = degrees(asin(self.y))
+      angle = round(angle,variables.precision)
+    return angle
 
 
   def __str__(self):
+    """
+    returns: a string representation of this position
+      '(x,y)'
+    """
     return "("+str(self.x)+","+str(self.y)+")"
 
 
   def __repr__(self):
+    """
+    Used when this class is printed with 'print()'
+    returns: self.__str__()
+    """
     return self.__str__()
 
 
+  # called when you do 'if position == otherposition'
   def __eq__(self,other):
+    """
+    other: another Position2f object
+    returns: True if this element and other have the same values
+    
+      a = Position2f(2,2)
+      b = Position2f(3,3)
+      c = a == b
+      # c is False
+      
+      b = Position(2,2)
+      c = a == b
+      #c is True
+    """
     if not isinstance(other,Position2f):
       return False
 
@@ -62,6 +97,7 @@ class Position2f:
     return True
 
 
+  # is called when you do 'abc + def' or 'abc += def'
   def __add__(self,other):
     if not isinstance(other,Position2f):
       raise Exception("can't add Position2f and",type(other))
