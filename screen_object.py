@@ -88,7 +88,7 @@ class ScreenObject:
     if self.type == "sphere":
       raise Exception("can't add points to a sphere, they are auto-generated")
     if not isinstance(points,(list,tuple,Position3f)):
-      raise Exception("expected a tuple of Position3f objects",type(point))
+      raise Exception("expected a tuple of Position3f objects",points)
 
     for point in points:
       self.add_point(point)
