@@ -17,7 +17,7 @@ default_colour = [175.0,175.0,175.0] # RGB
 
 
 # controls
-move_speed = [1,1,1]
+move_speed = [4,4,4]
 mouse_sensitivity = [0.5,0.5]
 
 
@@ -38,3 +38,7 @@ precision = 6
 
 # gravity constant
 gravity = 6.67e-11
+
+
+# simulation world size
+simulation_bounds = [1000,1000,1000]

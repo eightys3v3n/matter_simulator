@@ -78,7 +78,9 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-5,5],[-5,5],[-5,5])
+    particle.position = Random3f([-variables.simulation_bounds[0],variables.simulation_bounds[0]],
+                                 [-variables.simulation_bounds[1],variables.simulation_bounds[1]],
+                                 [-variables.simulation_bounds[2],variables.simulation_bounds[2]])
 
     # random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
@@ -87,9 +89,9 @@ class Simulation:
 
   def reset_out_of_bounds(self):
     for p in self.particles:
-      if p.position.x > 10:
+      if p.position.x > variables.simulation_bounds[0] or p.position.x < -variables.simulation_bounds[0]:
         self.reset_particle(p)
-      if p.position.y > 10:
+      if p.position.y > variables.simulation_bounds[1] or p.position.y < -variables.simulation_bounds[1]:
         self.reset_particle(p)
-      if p.position.z > 10:
+      if p.position.z > variables.simulation_bounds[2] or p.position.z < -variables.simulation_bounds[2]:
         self.reset_particle(p)

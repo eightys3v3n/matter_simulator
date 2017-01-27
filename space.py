@@ -409,6 +409,19 @@ class Vector3f:
       raise Exception("can't multiply Vector3f and ",other)
 
 
+  def __truediv__(self,other):
+    if isinstance(other,Vector3f):
+      raise Exception("vector3f / vector3f isn't implimented yet")
+    elif isinstance(other,int) or isinstance(other,float):
+      ret = Vector3f()
+      ret.x = self.x / other
+      ret.y = self.y / other
+      ret.z = self.z / other
+      return ret
+    else:
+      raise Exception("can't divide Vector3f and ",other)
+
+
   def __str__(self):
     array = []
     array.append(self.origin.x)

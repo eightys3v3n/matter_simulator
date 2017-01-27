@@ -9,7 +9,7 @@ from space import Position3f,Vector3f
 
 
 class Particle:
-  def __init__(self,mass=20000,density=.0001):
+  def __init__(self,mass=100,density=2):
     self.mass = mass
     self.density = density
     self.position = Position3f()

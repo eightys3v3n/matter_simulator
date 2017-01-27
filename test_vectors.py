@@ -46,6 +46,17 @@ def V3f_Multiply_Test():
 V3f_Multiply_Test_req = []
 
 
+def V3f_Divide_Test():
+  a = space.Vector3f(space.Position3f(9,9,9))
+  r = a / 3
+  if r != space.Vector3f(space.Position3f(3,3,3)):
+    print("failed to divide 9,9,9 by 3, actually got ",r)
+    return True
+
+  return False
+V3f_Divide_Test_req = []
+
+
 def Vector3f_Test():
   pass
 Vector3f_Test_req = [test_positions.Positions_Test,V3f_Equals_Test,V3f_AddTo_Test,V3f_Multiply_Test]
