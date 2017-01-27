@@ -5,6 +5,7 @@ from particle import Particle
 from screen_object import ScreenObject
 from window import Window
 from utils import Random3f
+from acceleration import gravity
 import variables,space,acceleration
 
 
@@ -37,7 +38,7 @@ class Simulation:
     for i in range(len(self.particles)):
 
       # do gravity here
-      #gravity(particles)
+      gravity(self.particles)
 
       # move the particle
       self.particles[i].update()

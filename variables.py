@@ -31,8 +31,10 @@ physics_update_time = 1.0/60.0
 # to wait before inserting any more
 max_queue_size = 10
 
+
 # number of decimals that all calculations are rounded to
 precision = 6
 
 
-gravity = 1
+# gravity constant
+gravity = 6.67e-11

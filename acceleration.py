@@ -47,6 +47,20 @@ def gravity_of_p2_on_p1(p1,p2):
   return new_acceleration
 
 
+def gravity_of_particles_on_p1(p1,particles):
+  for particle in particles:
+    accel = Vector3f()
+    if particle == p1:
+      continue
+    accel += gravity_of_p2_on_p1(p1,particle)
+  p1.acceleration += accel
+
+
+def gravity(particles):
+  for p1 in particles:
+    gravity_of_particles_on_p1(p1,particles)
+
+
 if __name__ == '__main__':
   parent = Particle()
   child = Particle()
