@@ -25,7 +25,7 @@ mouse_sensitivity = [0.5,0.5]
 default_sphere_args = [30,30]
 
 # perform a physics update every this many fractions of a second
-physics_update_time = 1.0
+physics_update_time = 1.0/60.0
 
 # max number of actions that the simulation or the window can queue up before it is told
 # to wait before inserting any more

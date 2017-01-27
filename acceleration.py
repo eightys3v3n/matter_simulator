@@ -53,14 +53,18 @@ def gravity_of_particles_on_p1(p1,particles):
     if particle == p1:
       continue
     accel += gravity_of_p2_on_p1(p1,particle)
-  p1.acceleration += accel
-  if p1.acceleration.x >= 10 or p1.acceleration.y >= 10 or p1.acceleration.z >= 10:
-    print(p1.acceleration)
+
+  if p1 != particles[0]:
+    print(accel)
+  return accel
+  #if p1.acceleration.x >= 10 or p1.acceleration.y >= 10 or p1.acceleration.z >= 10:
+    #print(p1.acceleration)
 
 
 def gravity(particles):
-  for p1 in particles:
-    gravity_of_particles_on_p1(p1,particles)
+  for i in range(len(particles)):
+    if i != 0:
+      particles[i].acceleration += gravity_of_particles_on_p1(particles[i],particles)
 
 
 if __name__ == '__main__':

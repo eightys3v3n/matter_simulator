@@ -122,6 +122,12 @@ class Window(Window):
   def on_key_press(self,symbol,modifiers):
     if symbol == key.ESCAPE:
       self.unlock_mouse()
+    elif symbol == key.EQUAL:
+      variables.physics_update_time *= 0.6
+      print(variables.physics_update_time)
+    elif symbol == key.MINUS:
+      variables.physics_update_time *= 1.4
+      print(variables.physics_update_time)
 
 
   # called when a key is released
