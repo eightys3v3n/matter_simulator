@@ -54,6 +54,8 @@ def gravity_of_particles_on_p1(p1,particles):
       continue
     accel += gravity_of_p2_on_p1(p1,particle)
   p1.acceleration += accel
+  if p1.acceleration.x >= 1 or p1.acceleration.y >= 1 or p1.acceleration.z >= 1:
+    print(p1.acceleration)
 
 
 def gravity(particles):

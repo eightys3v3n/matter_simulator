@@ -44,7 +44,7 @@ class View:
 
 
   def draw(self):
-    gluPerspective(65.0,variables.screen_size[0]/variables.screen_size[1],0.1,1000.0)
+    gluPerspective(65.0,variables.screen_size[0]/variables.screen_size[1],0.1,1000000.0)
     glRotatef(self.direction.x,1,0,0)
     glRotatef(self.direction.y,0,1,0)
     glTranslatef(self.position.x,self.position.y,self.position.z)
