@@ -26,9 +26,6 @@ class Simulation:
 
     self.new_particle()
     self.new_particle()
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
 
     schedule_interval(self.update,variables.physics_update_time)
 
@@ -72,6 +69,7 @@ class Simulation:
       for p2 in self.particles:
         if p1 != p2:
           if p1.displacement(p2).magnitude <= p1.radius + p2.radius:
+            print("collided")
             self.reset_particle(p1)
 
 
