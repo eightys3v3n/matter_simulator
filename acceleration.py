@@ -22,8 +22,8 @@ import variables
 # okay so what needs to happen is that position which is the vector towards the parent particle needs to have that particles mass associated with it, and then gravity will work
 def gravitaitonal_Fields(mass, G, acceleration, position):
   scalar = G*mass / position.dot(position)
-  unit_vector = Vector3f(Position3f(1,1,1))
-  acc = Vector3f(Position3f(1,1,1)) * scalar
+  unit_vector = Vector3f(position/position.mag)
+  acc = unit_vector * scalar
   acceleration += acc
   return acceleration
 
