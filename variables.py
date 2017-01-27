@@ -37,7 +37,7 @@ precision = 6
 
 
 # gravity constant
-gravity = 6.67e-11
+gravity = 6.67e-3
 
 
 # simulation world size

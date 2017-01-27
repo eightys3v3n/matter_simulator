@@ -63,8 +63,7 @@ def gravity_of_particles_on_p1(p1,particles):
 
 def gravity(particles):
   for i in range(len(particles)):
-    if i != 0:
-      particles[i].acceleration += gravity_of_particles_on_p1(particles[i],particles)
+    particles[i].acceleration += gravity_of_particles_on_p1(particles[i],particles)
 
 
 if __name__ == '__main__':

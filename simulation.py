@@ -67,13 +67,12 @@ class Simulation:
 
   def collide(self):
     for a in range(len(self.particles)):
-      if a != 0:
-        p1 = self.particles[a]
-        for p2 in self.particles:
-          if p1 != p2:
-            if p1.displacement(p2).magnitude <= p1.radius + p2.radius:
-              print("collided")
-              self.reset_particle(p1)
+      p1 = self.particles[a]
+      for p2 in self.particles:
+        if p1 != p2:
+          if p1.displacement(p2).magnitude <= p1.radius + p2.radius:
+            print("collided")
+            self.reset_particle(p1)
 
 
   def reset_particle(self,particle):
@@ -91,11 +90,10 @@ class Simulation:
 
   def reset_out_of_bounds(self):
     for i in range(len(self.particles)):
-      if i != 0:
-        p = self.particles[i]
-        if p.position.x > variables.simulation_bounds[0] or p.position.x < -variables.simulation_bounds[0]:
-          self.reset_particle(p)
-        if p.position.y > variables.simulation_bounds[1] or p.position.y < -variables.simulation_bounds[1]:
-          self.reset_particle(p)
-        if p.position.z > variables.simulation_bounds[2] or p.position.z < -variables.simulation_bounds[2]:
-          self.reset_particle(p)
+      p = self.particles[i]
+      if p.position.x > variables.simulation_bounds[0] or p.position.x < -variables.simulation_bounds[0]:
+        self.reset_particle(p)
+      if p.position.y > variables.simulation_bounds[1] or p.position.y < -variables.simulation_bounds[1]:
+        self.reset_particle(p)
+      if p.position.z > variables.simulation_bounds[2] or p.position.z < -variables.simulation_bounds[2]:
+        self.reset_particle(p)
