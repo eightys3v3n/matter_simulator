@@ -23,11 +23,11 @@ if __name__ == "__main__":
       # window starts drawing it.
       screen_objects = []
 
-      # the drawer and event handler (keyboard/mouse)
-      window = Window(screen_objects)
-      
       # the physics simulator, particle mover
       simulation = Simulation(screen_objects)
+
+      # the drawer and event handler (keyboard/mouse)
+      window = Window(screen_objects,simulation)
 
       # run main program loop, starts drawing and all that stuff
       run()

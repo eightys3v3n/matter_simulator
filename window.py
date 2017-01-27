@@ -3,7 +3,7 @@ from pyglet.graphics import Batch
 from pyglet.window import Window
 from pyglet.window import key
 from pyglet.window import mouse
-from pyglet.clock import schedule_interval
+from pyglet.clock import schedule_interval,unschedule
 from pyglet.clock import set_fps_limit
 from pyglet.gl import *
 from space import Position3f,Position2f
@@ -24,11 +24,13 @@ options['debug_gl'] = False
 
 
 class Window(Window):
-  def __init__(self,objects):
+  def __init__(self,objects,simulation):
     # puts all the stuff in the pyglet.window.Widnow class inside this class
     # so instead of creating a window and calling self.window.function, you can call
     # self.function
     super(Window,self).__init__()
+
+    self.simulation = simulation
 
     # initialize the window
     self.set_size(int(variables.screen_size[0]),int(variables.screen_size[1]))
@@ -124,10 +126,14 @@ class Window(Window):
       self.unlock_mouse()
     elif symbol == key.EQUAL:
       variables.physics_update_time *= 0.6
+      unschedule(self.simulation.update)
+      schedule_interval(self.simulation.update,variables.physics_update_time)
       print(variables.physics_update_time)
     elif symbol == key.MINUS:
       variables.physics_update_time *= 1.4
       print(variables.physics_update_time)
+      unschedule(self.simulation.update)
+      schedule_interval(self.simulation.update,variables.physics_update_time)
 
 
   # called when a key is released
