@@ -1,3 +1,4 @@
+import copy
 from math import degrees,hypot,atan,cos,sin,atan2,radians,asin,acos,sqrt
 import variables
 
@@ -286,7 +287,7 @@ class Vector3f:
 
   @property
   def direction(self):
-    d = Vector3f()
+    d = Vector3f(Position3f(),Position3f())
     d.destination.x = self.destination.x - self.origin.x
     d.destination.y = self.destination.y - self.origin.y
     d.destination.z = self.destination.z - self.origin.z
@@ -343,14 +344,9 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't get the dot product of Vector3f and ",other)
 
-    print("before",self,other)
-    print("direction",self.direction.destination)
-    print("direction",other.direction.destination)
     me = self.direction.destination
-    print("me",me)
     you = other.direction.destination
-    print("you",you)
-    print("v3f dot product of ",me,you)
+
     return me.dot(you)
 
 
