@@ -33,3 +33,6 @@ max_queue_size = 10
 
 # number of decimals that all calculations are rounded to
 precision = 6
+
+
+gravity = 1

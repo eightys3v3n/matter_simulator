@@ -10,7 +10,7 @@ class Position2f:
   """
   A coordinate in 2D space. Defined by x and y.
   """
-  
+
   def __init__(self,x=0.0,y=0.0,angle=None):
     """
     Construct a new position object
@@ -38,8 +38,8 @@ class Position2f:
     returns: an array, [x,y], for this object
     """
     return [self.x,self.y]
-    
-    
+
+
   @property
   def angle(self):
     """
@@ -77,12 +77,12 @@ class Position2f:
     """
     other: another Position2f object
     returns: True if this element and other have the same values
-    
+
       a = Position2f(2,2)
       b = Position2f(3,3)
       c = a == b
       # c is False
-      
+
       b = Position(2,2)
       c = a == b
       #c is True
@@ -152,6 +152,20 @@ class Position3f:
   @property
   def array(self):
     return (self.x,self.y,self.z)
+
+
+  def dot(self,other):
+    """
+    Returns the dot product of self and other, both Position3f tyoes. or it should; it's unchecked
+    """
+    if not isinstance(other,Position3f):
+      raise Exception("can't get the dot product of Position3f and ",other)
+    ret = Position3f()
+    ret.x = self.x * other.x
+    ret.y = self.y * other.y
+    ret.z = self.z * other.z
+    print("p3f dot product of ",self,other)
+    return ret.x + ret.y + ret.z
 
 
   def __str__(self):
@@ -325,6 +339,14 @@ class Vector3f:
   def z(self,v):
     self.destination.z = self.origin.z + v
 
+
+  def dot(self,other):
+    if not isinstance(other,Vector3f):
+      raise Exception("can't get the dot product of Vector3f and ",other)
+    me = self.direction.destination
+    you = other.direction.destination
+    print("v3f dot product of ",me,you)
+    return me.dot(you)
 
 
   def __eq__(self,other):

@@ -1,7 +1,7 @@
 import space
 
 
-def V2f_Equals_Test():
+def P2f_Equals_Test():
   a = space.Position2f()
   b = space.Position2f()
   if a != b:
@@ -13,10 +13,10 @@ def V2f_Equals_Test():
     print("two different space. are equal")
     return True
   return False
-V2f_Equals_Test_req = []
+P2f_Equals_Test_req = []
 
 
-def V2f_Addition_Test():
+def P2f_Addition_Test():
   a = space.Position2f()
   b = space.Position2f(1,1)
   a += b
@@ -28,7 +28,24 @@ def V2f_Addition_Test():
     print("didn't add correctly",a+b)
     return True
   return False
-V2f_Addition_Test_req = []
+P2f_Addition_Test_req = []
+
+
+def P3f_Dot_Test():
+  a = space.Position3f(2,3,7)
+  b = space.Position3f(4,8,2)
+  if a.dot(b) != 46:
+    print("incorrect dot product 2,3,7 . 4,8,2 = 46|",a.dot(b))
+    return True
+
+  a = space.Position3f(3,3,3)
+  b = space.Position3f(2,2,2)
+  if a.dot(b) != 18:
+    print("incorrect dot product 3,3,3 . 2,2,2 = 18|",a.dot(b))
+    return True
+
+  return False
+P3f_Dot_Test_req = []
 
 
 def Position2f_Test():
@@ -59,7 +76,7 @@ def Position2f_Test():
     return True
 
   return False
-Position2f_Test_req = [V2f_Equals_Test,V2f_Addition_Test]
+Position2f_Test_req = [P2f_Equals_Test,P2f_Addition_Test]
 
 
 def Position3f_Test():
