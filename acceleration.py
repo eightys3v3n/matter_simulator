@@ -23,8 +23,8 @@ import variables
 def gravitaitonal_Fields(mass, G, acceleration, position):
   scalar = G*mass / position.dot(position)
   unit_vector = Vector3f(Position3f(1,1,1))
-  acc = unit_vector.scalar_mult
-  acceleration =+ acc
+  acc = Vector3f(Position3f(1,1,1)) * scalar
+  acceleration += acc
   return acceleration
 
 
@@ -53,3 +53,4 @@ if __name__ == '__main__':
   child.position = Position3f(10,10,10)
 
   new_acceleration = gravity_of_p2_on_p1(parent,child)
+  print(new_acceleration)

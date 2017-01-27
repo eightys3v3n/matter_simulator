@@ -166,7 +166,6 @@ class Position3f:
     ret.x = self.x * other.x
     ret.y = self.y * other.y
     ret.z = self.z * other.z
-    print("p3f dot product of ",self,other)
 
     return ret.x + ret.y + ret.z
 
