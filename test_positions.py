@@ -35,13 +35,13 @@ def P3f_Dot_Test():
   a = space.Position3f(2,3,7)
   b = space.Position3f(4,8,2)
   if a.dot(b) != 46:
-    print("incorrect dot product 2,3,7 . 4,8,2 = 46|",a.dot(b))
+    print("incorrect dot product 2,3,7 . 4,8,2 = 46, is",a.dot(b))
     return True
 
   a = space.Position3f(3,3,3)
   b = space.Position3f(2,2,2)
   if a.dot(b) != 18:
-    print("incorrect dot product 3,3,3 . 2,2,2 = 18|",a.dot(b))
+    print("incorrect dot product 3,3,3 . 2,2,2 = 18, is",a.dot(b))
     return True
 
   return False

@@ -26,17 +26,29 @@ V3f_AddTo_Test_req = []
 def V3f_Dot_Test():
   a = space.Vector3f(space.Position3f(2,3,7))
   b = space.Vector3f(space.Position3f(4,8,2))
-  if a.dot(b) != 46:
-    print("dot product of two vectors is wrong, 46|",a.dot(b))
+  r = a.dot(b)
+  if r != 46:
+    print("dot product of two vectors is wrong, should be 46 is",r)
     return True
 
   return False
 V3f_Dot_Test_req = []
 
 
+def V3f_Multiply_Test():
+  a = space.Vector3f(space.Position3f(2,2,2))
+  r = a * 2
+  if r != space.Vector3f(space.Position3f(4,4,4)):
+    print(a," multiplied by 2 should be 4,4,4 but its ",r)
+    return True
+
+  return False
+V3f_Multiply_Test_req = []
+
+
 def Vector3f_Test():
   pass
-Vector3f_Test_req = [test_positions.Positions_Test,V3f_Equals_Test,V3f_AddTo_Test]
+Vector3f_Test_req = [test_positions.Positions_Test,V3f_Equals_Test,V3f_AddTo_Test,V3f_Multiply_Test]
 
 
 def Vectors_Test():

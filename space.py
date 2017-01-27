@@ -160,11 +160,13 @@ class Position3f:
     """
     if not isinstance(other,Position3f):
       raise Exception("can't get the dot product of Position3f and ",other)
+
     ret = Position3f()
     ret.x = self.x * other.x
     ret.y = self.y * other.y
     ret.z = self.z * other.z
     print("p3f dot product of ",self,other)
+
     return ret.x + ret.y + ret.z
 
 
@@ -217,9 +219,6 @@ class Position3f:
 
 
   def __mul__(self,other):
-    if not isinstance(other,Position3f):
-      raise Exception("can't add Position3f and",other)
-
     if isinstance(other,Position3f):
       return Position3f(self.x*other.x,self.y*other.y,self.z*other.z)
     elif isinstance(other,float):
@@ -343,8 +342,14 @@ class Vector3f:
   def dot(self,other):
     if not isinstance(other,Vector3f):
       raise Exception("can't get the dot product of Vector3f and ",other)
+
+    print("before",self,other)
+    print("direction",self.direction.destination)
+    print("direction",other.direction.destination)
     me = self.direction.destination
+    print("me",me)
     you = other.direction.destination
+    print("you",you)
     print("v3f dot product of ",me,you)
     return me.dot(you)
 
@@ -382,9 +387,6 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't add Vector3f and",other)
 
-    #print("   self",self)
-    #print("   other",other)
-
     new = Vector3f()
     own_zero_origin = self.destination
     other_zero_origin = other.destination
@@ -397,6 +399,19 @@ class Vector3f:
 
     new.destination = own_zero_origin + other_zero_origin
     return new
+
+
+  def __mul__(self,other):
+    if isinstance(other,Vector3f):
+      raise Exception("vector3f * vector3f isn't implimented yet")
+    elif isinstance(other,int) or isinstance(other,float):
+      ret = Vector3f()
+      ret.x = self.x * other
+      ret.y = self.y * other
+      ret.z = self.z * other
+      return ret
+    else:
+      raise Exception("can't multiply Vector3f and ",other)
 
 
   def __str__(self):
