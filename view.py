@@ -1,4 +1,9 @@
-from pyglet.gl import gluPerspective,glRotatef,glTranslatef
+
+# this line makes the screen flash when running tests
+#from pyglet.gl import gluPerspective,glRotatef,glTranslatef
+# this one doesn't
+from pyglet import gl
+
 from math import hypot,cos,sin,tan,acos,atan,asin,radians,degrees,atan2
 from space import Position3f,Position2f
 import variables
@@ -28,11 +33,11 @@ class View:
     self.position.y += position.y
 
 
-  def look(self,angle):
-    if not isinstance(angle,Position2f):
-      raise Exception("expected Position2f",type(angle))
+  def look(self,angles):
+    if not isinstance(angles,Position2f):
+      raise Exception("expected Position2f",type(angles))
 
-    self.direction += angle
+    self.direction += angles
     if self.direction.y > 360:
       self.direction.y -= 360
     elif self.direction.y < -360:
@@ -44,7 +49,7 @@ class View:
 
 
   def draw(self):
-    gluPerspective(65.0,variables.screen_size[0]/variables.screen_size[1],0.1,1000000.0)
-    glRotatef(self.direction.x,1,0,0)
-    glRotatef(self.direction.y,0,1,0)
-    glTranslatef(self.position.x,self.position.y,self.position.z)
+    gl.gluPerspective(65.0,variables.screen_size[0]/variables.screen_size[1],0.1,1000000.0)
+    gl.glRotatef(self.direction.x,1,0,0)
+    gl.glRotatef(self.direction.y,0,1,0)
+    gl.glTranslatef(self.position.x,self.position.y,self.position.z)

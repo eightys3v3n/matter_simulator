@@ -59,10 +59,10 @@ class Position2f:
     angle = 0
     if self.x:
       angle = degrees(atan(self.y/self.x))
-      angle = round(angle,presicion)
+      angle = round(angle,precision)
     elif self.y:
       angle = degrees(asin(self.y))
-      angle = round(angle,presicion)
+      angle = round(angle,precision)
     return angle
 
 

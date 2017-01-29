@@ -30,6 +30,17 @@ class TestPosition2f(unittest.TestCase):
     self.assertEqual(res.y,1.0)
 
 
+  def test_array(self):
+    self.assertEqual(Position2f(3,5).array,[3.0,5.0])
+    self.assertEqual(Position2f().array,[0.0,0.0])
+
+
+  def test_angle(self):
+    self.assertEqual(Position2f(1,1).angle,45.0)
+    self.assertEqual(Position2f(0,1).angle,90.0)
+    self.assertEqual(Position2f(1,0).angle,0.0)
+
+
 class TestPosition3f(unittest.TestCase):
   def test___init__(self):
     res = Position3f()
