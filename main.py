@@ -4,8 +4,16 @@ from sys import argv,exit
 if __name__ == "__main__":
   if len(argv) > 1:
     if str(argv[1]) == "test":
-      import test
-      exit(test.test_all())
+      import unittest
+
+      suites = unittest.defaultTestLoader.discover(".")
+      suite = unittest.TestSuite(suites)
+      runner = unittest.TextTestRunner(verbosity=1)
+      runner.run(suite)
+
+    else:
+      print("unknown command",str(argv[1]))
+      exit(1)
 
   else:
     import threading

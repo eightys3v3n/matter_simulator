@@ -1,4 +1,4 @@
-from random import random
+from random import random as _random
 from space import Position3f
 
 
@@ -6,12 +6,24 @@ from space import Position3f
 # this file is for stuff that isn't physics, but doesn't fit in the other files
 
 
-def Map(v,mn,mx,nmn,nmx):
-  r = v - mn
-  r /= mx - mn
-  r *= nmx - nmn
-  r += nmn
-  return r
+def Map(value,value_min,value_max,return_min,return_max):
+  ret = value - value_min
+  ret /= value_max - value_min
+  ret *= return_max - return_min
+  ret += return_min
+
+  if ret > return_max:
+    return return_max
+  elif ret < return_min:
+    return return_min
+  else:
+    return ret
+
+
+def Random(min=0.0,max=1.0):
+  ret = _random()
+  ret = Map(ret,0,1,min,max)
+  return ret
 
 
 def Random3f(x_range,y_range,z_range):

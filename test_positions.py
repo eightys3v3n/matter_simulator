@@ -1,126 +1,218 @@
-import space
+import unittest
+import utils
+from space import Position3f,Position2f
 
 
-def P2f_Equals_Test():
-  a = space.Position2f()
-  b = space.Position2f()
-  if a != b:
-    print("two equal space. are not equal")
-    return True
+class TestPosition2f(unittest.TestCase):
+  def test___init__(self):
+    res = Position2f()
+    self.assertEqual(res.x,0.0)
+    self.assertEqual(res.y,0.0)
 
-  b = space.Position2f(1,1)
-  if a == b:
-    print("two different space. are equal")
-    return True
-  return False
-P2f_Equals_Test_req = []
+    res = Position2f(1,3)
+    self.assertEqual(res.x,1.0)
+    self.assertEqual(res.y,3.0)
 
+    res = Position2f(x=1,y=3)
+    self.assertEqual(res.x,1.0)
+    self.assertEqual(res.y,3.0)
 
-def P2f_Addition_Test():
-  a = space.Position2f()
-  b = space.Position2f(1,1)
-  a += b
-  if a != space.Position2f(1,1):
-    print("didn't do += correctly",a)
-    return True
+    res = Position2f(angle=45)
+    self.assertEqual(res.x,0.707107)
+    self.assertEqual(res.y,0.707107)
 
-  if a+b != space.Position2f(2,2):
-    print("didn't add correctly",a+b)
-    return True
-  return False
-P2f_Addition_Test_req = []
+    res = Position2f(angle=0)
+    self.assertEqual(res.x,1.0)
+    self.assertEqual(res.y,0.0)
+
+    res = Position2f(angle=90)
+    self.assertEqual(res.x,0.0)
+    self.assertEqual(res.y,1.0)
 
 
-def P3f_Dot_Test():
-  a = space.Position3f(2,3,7)
-  b = space.Position3f(4,8,2)
-  if a.dot(b) != 46:
-    print("incorrect dot product 2,3,7 . 4,8,2 = 46, is",a.dot(b))
-    return True
+class TestPosition3f(unittest.TestCase):
+  def test___init__(self):
+    res = Position3f()
+    self.assertEqual(res.x,0.0)
+    self.assertEqual(res.y,0.0)
+    self.assertEqual(res.z,0.0)
 
-  a = space.Position3f(3,3,3)
-  b = space.Position3f(2,2,2)
-  if a.dot(b) != 18:
-    print("incorrect dot product 3,3,3 . 2,2,2 = 18, is",a.dot(b))
-    return True
+    res = Position3f(3,1,4)
+    self.assertEqual(res.x,3.0)
+    self.assertEqual(res.y,1.0)
+    self.assertEqual(res.z,4.0)
 
-  return False
-P3f_Dot_Test_req = []
-
-
-def Position2f_Test():
-  a = space.Position2f(0,0)
-  b = space.Position2f(2,2)
-  if a.displacement(b) != space.Position2f(2,2):
-    print("displacement is incorrect 2,2",a.displacement(b))
-    return True
-
-  a = space.Position2f()
-  if a.angle != 0.0:
-    print("angle for 0,0 is incorrect",a.angle)
-    return True
-
-  a = space.Position2f(1,1)
-  if a.angle != 45.0:
-    print("angle for 1,1 is incorrect",a.angle)
-    return True
-
-  a = space.Position2f(0,1)
-  if a.angle != 90.0:
-    print("angle for 0,1 is incorrect",a.angle)
-    return True
-
-  a = space.Position2f(1,0)
-  if a.angle != 0.0:
-    print("angle for 1,0 is incorrect",a.angle)
-    return True
-
-  return False
-Position2f_Test_req = [P2f_Equals_Test,P2f_Addition_Test]
+    res = Position3f(x=3,y=1,z=5)
+    self.assertEqual(res.x,3.0)
+    self.assertEqual(res.y,1.0)
+    self.assertEqual(res.z,5.0)
 
 
-def Position3f_Test():
-  a = space.Position3f(0,0,0)
-  b = space.Position3f(0,0,0)
-  if a != b:
-    print("two equal space. are not equal")
-    return True
-
-  b = space.Position3f(1,1,1)
-  if a == b:
-    print("two different space. are equal")
-    return True
-
-  a += b
-  if a != space.Position3f(1,1,1):
-    print("didn't do += correctly",a)
-    return True
-
-  if a+b != space.Position3f(2,2,2):
-    print("didn't add correctly",a+b)
-    return True
-
-  a = space.Position3f(1.5,2,4) * space.Position3f(5,2,1)
-  if a != space.Position3f(7.5,4,4):
-    print("broken multiplication 1.5,2,4 * 5,2,1 = 7.5,4,4",a)
-    return True
-
-  a = space.Position3f(3,6,9)
-  a *= space.Position3f(2,0.5,3)
-  if a != space.Position3f(6,3,27):
-    print("broken multiplication 3,6,9 * 2,0.5,3 = 6,3,27",a)
-    return True
-
-  a = space.Position3f(0,0,0)
-  b = space.Position3f(2,2,2)
-  if a.displacement(b) != space.Vector3f(space.Position3f(2,2,2)):
-    print("displacement is incorrect 2,2,2",a.displacement(b))
-    return True
-
-  return False
-Position3f_Test_req = [Position2f_Test]
+  def test___str__(self):
+    self.assertEqual(Position3f(3,1,4).__str__(),"(3.0,1.0,4.0)")
 
 
-def Positions_Test():
-  return None
-Positions_Test_req = [Position2f_Test,Position3f_Test]
+  def test___repr__(self):
+    self.assertEqual(Position3f(1,3,5).__repr__(),"(1.0,3.0,5.0)")
+
+
+  def test___eq__(self):
+    self.assertTrue(Position3f(1,1,1) == Position3f(1,1,1))
+    self.assertTrue(Position3f(4.0,1,1) == Position3f(4.0,1,1))
+    self.assertFalse(Position3f(0,1,1) == Position3f(1,1,1))
+
+
+  def test___ne__(self):
+    self.assertTrue(Position3f(1,0,0) != Position3f(1,1,1))
+    self.assertFalse(Position3f(1,1,1) != Position3f(1,1,1))
+
+
+  def test___add__(self):
+    res = Position3f(0,0,0) + Position3f(0,0,0)
+    self.assertEqual(res,Position3f(0,0,0))
+
+    res = Position3f(0,0,0) + Position3f(0,1,0)
+    self.assertEqual(res,Position3f(0,1,0))
+
+    res = Position3f(-1,3,-2) + Position3f(4,-2,5)
+    self.assertEqual(res,Position3f(3,1,3))
+
+    a = Position3f(1,1,1)
+    b = Position3f(-2,-2,-2)
+    res = a+b
+    self.assertIsNot(res,a)
+    self.assertIsNot(res,b)
+
+
+  def test___iadd__(self):
+    init = Position3f()
+    res = init
+    res += Position3f(1,1,1)
+
+    self.assertIs(res,init,msg="in-place addition isn't changing the original")
+    self.assertEqual(res,Position3f(1,1,1),msg="in-place addition isn't doing addition correctly")
+
+
+  def test___sub__(self):
+    res = Position3f(3,3,3) - Position3f(1,1,1)
+    self.assertEqual(res,Position3f(2,2,2))
+
+    res = Position3f(4,6,1) - Position3f(2,1,-4)
+    self.assertEqual(res,Position3f(2,5,5))
+
+    a = Position3f(1,1,1)
+    b = Position3f(-1,-1,-1)
+    res = a-b
+    self.assertIsNot(res,a)
+    self.assertIsNot(res,b)
+
+
+  def test___isub__(self):
+    init = Position3f()
+    res = init
+    res -= Position3f(-5,-3,-1)
+
+    self.assertIs(res,init,msg="in-place subtraction isn't changing the original")
+    self.assertEqual(res,Position3f(5,3,1),msg="in-place subtraction isn't doing subtraction correctly")
+
+
+  def test___mul__(self):
+    res = Position3f(2,0.5,3) * Position3f(3,4,3)
+    self.assertEqual(res,Position3f(6,2,9))
+
+    res = Position3f(2,0.5,3) * Position3f(0,0,0)
+    self.assertEqual(res,Position3f(0,0,0))
+
+    res = Position3f(0,0,0) * Position3f(0,0,0)
+    self.assertEqual(res,Position3f(0,0,0))
+
+    res = Position3f(0,0,0) * 0
+    self.assertEqual(res,Position3f(0,0,0))
+
+    res = Position3f(2,3,5) * 2
+    self.assertEqual(res,Position3f(4,6,10))
+
+    res = Position3f(2,3,2) * 3.0
+    self.assertEqual(res,Position3f(6,9,6))
+
+
+    a = Position3f(2,2,2)
+    b = Position3f(3,1,4)
+    res = a*b
+    self.assertIsNot(res,a)
+    self.assertIsNot(res,b)
+
+
+  def test___imul__(self):
+    init = Position3f(2,2,2)
+    res = init
+    res *= Position3f(3,1,5)
+
+    self.assertIs(res,init,msg="in-place multiplication isn't changing the original")
+    self.assertEqual(res,Position3f(6,2,10),msg="in-place multiplication isn't doing multiplication correctly")
+
+    init = Position3f(2,2,2)
+    res = init
+    res *= 4
+
+    self.assertIs(res,init,msg="in-place multiplication isn't changing the original")
+    self.assertEqual(res,Position3f(8,8,8),msg="in-place multiplication isn't doing multiplication correctly")
+
+    init = Position3f(2,2,2)
+    res = init
+    res *= 0.5
+
+    self.assertIs(res,init,msg="in-place multiplication isn't changing the original")
+    self.assertEqual(res,Position3f(1,1,1),msg="in-place multiplication isn't doing multiplication correctly")
+
+
+  def test___truediv__(self):
+    ret = Position3f(9,9,9)
+    self.assertEqual(ret/3,Position3f(3,3,3),msg="true division isn't working correctly")
+    self.assertEqual(ret/2,Position3f(4.5,4.5,4.5),msg="true division isn't working correctly")
+
+
+  def test___itruediv__(self):
+    init = Position3f(9,9,9)
+    res = init
+    res /= 3
+    self.assertIs(res,init,msg="in-place true division isn't changing the original")
+    self.assertEqual(res,Position3f(3,3,3),msg="in-place division isn't working correctly")
+
+
+  def test_displacement(self):
+    a = Position3f()
+    b = Position3f(1,1,1)
+    r = a.displacement(b).direction.destination
+    self.assertEqual(r,Position3f(1,1,1))
+
+    a = Position3f(-1,-3,-1)
+    b = Position3f(1,2,1)
+    r = a.displacement(b).direction.destination
+    self.assertEqual(r,Position3f(2,5,2))
+
+    a = Position3f(1,1,1)
+    b = Position3f(4,6,-3)
+    r = a.displacement(b).direction.destination
+    self.assertEqual(r,Position3f(3,5,-4))
+
+
+  def test_array(self):
+    self.assertEqual(Position3f(3,5,1).array, [3.0,5.0,1.0])
+
+
+  def test_dot(self):
+    with self.assertRaises(Exception):
+      Position3f(3,3,3).dot(1)
+
+    self.assertEqual(Position3f(3,4,3).dot(Position3f(2,.5,2)), 14)
+    self.assertEqual(Position3f(0,0,0).dot(Position3f(2,.5,2)), 0.0)
+
+
+  def test_self_dot(self):
+    self.assertEqual(Position3f(3,3,3).self_dot, 27)
+    self.assertEqual(Position3f(0,0,0).self_dot, 0.0)
+
+
+if __name__ == '__main__':
+  unittest.main()
