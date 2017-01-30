@@ -74,12 +74,12 @@ class Window(Window):
 
     self.objects = objects
     self.batch = pyglet.graphics.Batch()
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],('v3f', (-2.5, -2.5, -5.0, -2.5, 2.5, -5.0, 2.5, 2.5, -5.0, 2.5, -2.5, -5.0)))
 
     self.view = View()
 
     self.mouse_locked = False
 
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],('v3f', (-2.5, -2.5, -3.0, -2.5, 2.5, -3.0, 2.5, 2.5, -3.0, 2.5, -2.5, -3.0)))
 
 
   # called when the window closes, used to stop threads and stuff
