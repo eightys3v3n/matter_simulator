@@ -19,57 +19,57 @@ import variables
 #vectors.append(v4)
 #vectors.append(v5)
 
-# okay so what needs to happen is that position which is the vector towards the parent particle needs to have that particles mass associated with it, and then gravity will work
-def gravitaitonal_Fields(mass, G, acceleration, position):
-  scalar = G*mass / position.dot(position)
-  unit_vector = Vector3f(position/position.magnitude)
-  acc = unit_vector * scalar
-  acceleration += acc
+
+def gravity_effect(mass,displacement):
+  """
+  mass:         int or float which is the mass of the particle who is being acted on
+  displacement: vector3f which is the distance from the particle being acted on to the particle acting on it
+  acceleration: vector3f which is the current acceleration of the particle being acted on
+  """
+  scalar = variables.gravity * mass / displacement.dot(displacement)
+  unit_vector = Vector3f()
+  unit_vector = displacement / displacement.magnitude
+  acceleration = unit_vector * scalar
+  acceleration.origin.x = round(acceleration.origin.x,variables.precision)
+  acceleration.origin.y = round(acceleration.origin.y,variables.precision)
+  acceleration.origin.z = round(acceleration.origin.z,variables.precision)
+  acceleration.destination.x = round(acceleration.destination.x,variables.precision)
+  acceleration.destination.y = round(acceleration.destination.y,variables.precision)
+  acceleration.destination.z = round(acceleration.destination.z,variables.precision)
   return acceleration
 
 
 
-def gravity_of_p2_on_p1(p1,p2):
-
-  # mass of parent particle
-  mass = p1.mass
-
-  # gravitational constant
-  g = variables.gravity
-
-  # current acceleration of parent particle
-  acceleration = p1.acceleration
-
+def gravity_between_particles(p1,p2):
   # displacement between parent and child particle
   displacement = p1.displacement(p2)
 
-  new_acceleration = gravitaitonal_Fields(mass,g,acceleration,displacement)
-  return new_acceleration
+  acceleration = gravity_effect(p1.mass,displacement) + p1.acceleration
+  acceleration.origin.x = round(acceleration.origin.x,variables.precision)
+  acceleration.origin.y = round(acceleration.origin.y,variables.precision)
+  acceleration.origin.z = round(acceleration.origin.z,variables.precision)
+  acceleration.destination.x = round(acceleration.destination.x,variables.precision)
+  acceleration.destination.y = round(acceleration.destination.y,variables.precision)
+  acceleration.destination.z = round(acceleration.destination.z,variables.precision)
+  return acceleration
 
 
-def gravity_of_particles_on_p1(p1,particles):
+def gravity_on_particle(p1,particles):
   for particle in particles:
     accel = Vector3f()
-    if particle == p1:
-      continue
-    accel += gravity_of_p2_on_p1(p1,particle)
+    if particle != p1:
+      accel += gravity_between_particles(p1,particle)
 
-  if p1 != particles[0]:
-    print(accel)
+  accel.origin.x = round(accel.origin.x,variables.precision)
+  accel.origin.y = round(accel.origin.y,variables.precision)
+  accel.origin.z = round(accel.origin.z,variables.precision)
+  accel.destination.x = round(accel.destination.x,variables.precision)
+  accel.destination.y = round(accel.destination.y,variables.precision)
+  accel.destination.z = round(accel.destination.z,variables.precision)
+
   return accel
-  #if p1.acceleration.x >= 10 or p1.acceleration.y >= 10 or p1.acceleration.z >= 10:
-    #print(p1.acceleration)
 
 
 def gravity(particles):
   for i in range(len(particles)):
-    particles[i].acceleration += gravity_of_particles_on_p1(particles[i],particles)
-
-
-if __name__ == '__main__':
-  parent = Particle()
-  child = Particle()
-  child.position = Position3f(10,10,10)
-
-  new_acceleration = gravity_of_p2_on_p1(parent,child)
-  print(new_acceleration)
+    particles[i].acceleration += gravity_on_particle(particles[i],particles)
