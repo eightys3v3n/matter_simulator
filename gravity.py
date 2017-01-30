@@ -1,4 +1,3 @@
-
 from particle import Particle
 from space import Position3f,Vector3f
 import variables
@@ -36,12 +35,12 @@ def gravity_effect(mass,displacement):
   acceleration.destination.x = round(acceleration.destination.x,variables.precision)
   acceleration.destination.y = round(acceleration.destination.y,variables.precision)
   acceleration.destination.z = round(acceleration.destination.z,variables.precision)
+
   return acceleration
 
 
 
 def gravity_between_particles(p1,p2):
-  # displacement between parent and child particle
   displacement = p1.displacement(p2)
 
   acceleration = gravity_effect(p1.mass,displacement) + p1.acceleration
@@ -51,14 +50,19 @@ def gravity_between_particles(p1,p2):
   acceleration.destination.x = round(acceleration.destination.x,variables.precision)
   acceleration.destination.y = round(acceleration.destination.y,variables.precision)
   acceleration.destination.z = round(acceleration.destination.z,variables.precision)
+
   return acceleration
 
 
 def gravity_on_particle(p1,particles):
   for particle in particles:
+    if particle is p1:
+      continue
+
     accel = Vector3f()
-    if particle != p1:
-      accel += gravity_between_particles(p1,particle)
+    print(accel)
+    accel += gravity_between_particles(p1,particle)
+    print(accel)
 
   accel.origin.x = round(accel.origin.x,variables.precision)
   accel.origin.y = round(accel.origin.y,variables.precision)
@@ -67,9 +71,12 @@ def gravity_on_particle(p1,particles):
   accel.destination.y = round(accel.destination.y,variables.precision)
   accel.destination.z = round(accel.destination.z,variables.precision)
 
+  print(accel)
+
   return accel
 
 
 def gravity(particles):
   for i in range(len(particles)):
+    print(i,end=":")
     particles[i].acceleration += gravity_on_particle(particles[i],particles)

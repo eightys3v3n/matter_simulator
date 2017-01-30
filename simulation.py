@@ -24,7 +24,6 @@ class Simulation:
     self.screen_objects = screen_objects
 
     self.new_particle()
-    self.particles[0].position = space.Position3f()
     self.new_particle()
 
     schedule_interval(self.update,variables.physics_update_time)
@@ -38,12 +37,15 @@ class Simulation:
       gravity(self.particles)
 
       # do collisions
-      self.collide()
+      #self.collide()
 
       self.reset_out_of_bounds()
 
       # move the particle
       self.particles[i].update()
+
+      #if i == 0:
+        #print(self.particles[i],end="\n\n")
 
       # update the shape on screen
       self.screen_objects[i].update_from_particle(self.particles[i])
@@ -78,12 +80,12 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-variables.simulation_bounds[0],variables.simulation_bounds[0]],
-                                 [-variables.simulation_bounds[1],variables.simulation_bounds[1]],
-                                 [-variables.simulation_bounds[2],variables.simulation_bounds[2]])
+    particle.position = Random3f([-50,50],
+                                 [-50,50],
+                                 [-50,50])
 
     # random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
-    #particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
+    particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
 
     particle.acceleration = space.Vector3f()
 

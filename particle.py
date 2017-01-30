@@ -71,7 +71,8 @@ class Particle:
 
 
   def __repr__(self):
-    string = "radius:"+str(self.radius)+"\n"
+    string = ""
+    #string = "radius:"+str(self.radius)+"\n"
     string += "position:"+str(self.position)+"\n"
     string += "velocity:"+str(self.velocity)+"\n"
     string += "acceleration:"+str(self.acceleration)
