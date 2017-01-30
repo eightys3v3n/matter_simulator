@@ -73,10 +73,13 @@ class Window(Window):
     #glFrontFace(GL_CCW)
 
     self.objects = objects
+    self.batch = pyglet.graphics.Batch()
 
     self.view = View()
 
     self.mouse_locked = False
+
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],('v3f', (-2.5, -2.5, -3.0, -2.5, 2.5, -3.0, 2.5, 2.5, -3.0, 2.5, -2.5, -3.0)))
 
 
   # called when the window closes, used to stop threads and stuff
@@ -192,4 +195,8 @@ class Window(Window):
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
     for obj in self.objects:
-      obj.draw()
+      if obj.type == "sphere":
+        obj.draw()
+        pass
+    glColor3f(255.0,255.0,255.0)
+    self.batch.draw()

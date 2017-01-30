@@ -69,7 +69,7 @@ class ScreenObject:
     elif self.type == "rectangle":
       return gl.GL_QUADS
     else:
-      raise Exception("unrecognized mode",self.mode)
+      raise Exception("unrecognized mode",self.type)
 
 
   @property
@@ -163,10 +163,12 @@ class ScreenObject:
     if self.headless:
       return None
 
-    if self.type != "sphere":
-      raise Exception("can only use ScreenObject.draw on sphere types")
-
-    gl.glColor3f(self.colour[0],self.colour[1],self.colour[2])
-    gl.glTranslatef(self.position.x,self.position.y,self.position.z)
-    gl.gluSphere(self.quadric,self.radius,self.sphere_args[0],self.sphere_args[1])
-    gl.glTranslatef(-self.position.x,-self.position.y,-self.position.z)
+    if self.type == "sphere":
+      gl.glColor3f(self.colour[0],self.colour[1],self.colour[2])
+      gl.glTranslatef(self.position.x,self.position.y,self.position.z)
+      gl.gluSphere(self.quadric,self.radius,self.sphere_args[0],self.sphere_args[1])
+      gl.glTranslatef(-self.position.x,-self.position.y,-self.position.z)
+    else:
+      gl.glShape()
+      gl.glAddPoint
+      gl.glEnd()

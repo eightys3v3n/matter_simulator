@@ -23,7 +23,6 @@ class Simulation:
     # an array of the ScreenObjects for all the particles
     self.screen_objects = screen_objects
 
-
     self.new_particle()
     self.particles[0].position = space.Position3f()
     self.new_particle()
@@ -45,6 +44,7 @@ class Simulation:
 
       # move the particle
       self.particles[i].update()
+
       # update the shape on screen
       self.screen_objects[i].update_from_particle(self.particles[i])
 
