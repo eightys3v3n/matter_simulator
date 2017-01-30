@@ -74,7 +74,24 @@ class Window(Window):
 
     self.objects = objects
     self.batch = pyglet.graphics.Batch()
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],('v3f', (-2.5, -2.5, -5.0, -2.5, 2.5, -5.0, 2.5, 2.5, -5.0, 2.5, -2.5, -5.0)))
+
+    bottom = screen_object.ScreenObject("rectangle",position=Position3f(0,-1000,0),size=Position3f(2000,0,2000))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],bottom.gl_vertices)
+
+    top = screen_object.ScreenObject("rectangle",position=Position3f(0,1000,0),size=Position3f(2000,0,2000))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],top.gl_vertices)
+
+    front = screen_object.ScreenObject("rectangle",position=Position3f(0,0,-1000),size=Position3f(2000,2000,0))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],front.gl_vertices)
+
+    back = screen_object.ScreenObject("rectangle",position=Position3f(0,0,1000),size=Position3f(2000,2000,0))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],back.gl_vertices)
+
+    left = screen_object.ScreenObject("rectangle",position=Position3f(-1000,0,0),size=Position3f(0,2000,2000))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],left.gl_vertices)
+
+    right = screen_object.ScreenObject("rectangle",position=Position3f(1000,0,0),size=Position3f(0,2000,2000))
+    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],right.gl_vertices)
 
     self.view = View()
 

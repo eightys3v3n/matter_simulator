@@ -60,9 +60,9 @@ def gravity_on_particle(p1,particles):
       continue
 
     accel = Vector3f()
-    print(accel)
+    print("before",accel)
     accel += gravity_between_particles(p1,particle)
-    print(accel)
+    print("after",accel)
 
   accel.origin.x = round(accel.origin.x,variables.precision)
   accel.origin.y = round(accel.origin.y,variables.precision)
@@ -71,7 +71,7 @@ def gravity_on_particle(p1,particles):
   accel.destination.y = round(accel.destination.y,variables.precision)
   accel.destination.z = round(accel.destination.z,variables.precision)
 
-  print(accel)
+  #print(accel)
 
   return accel
 

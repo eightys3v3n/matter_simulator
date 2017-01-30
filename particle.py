@@ -10,7 +10,7 @@ from space import Position3f,Vector3f
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = 100
+    self.mass = 1
     self.density = 2.6808
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))

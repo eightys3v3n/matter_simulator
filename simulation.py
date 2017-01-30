@@ -25,6 +25,7 @@ class Simulation:
 
     self.new_particle()
     self.new_particle()
+    self.particles[0].acceleration = space.Vector3f(1,1,1)
 
     schedule_interval(self.update,variables.physics_update_time)
 
@@ -33,11 +34,11 @@ class Simulation:
   def update(self,last_call_time):
     for i in range(len(self.particles)):
 
-      # do gravity here
-      gravity(self.particles)
-
       # do collisions
-      #self.collide()
+      self.collide()
+
+      # do gravity here
+      #gravity(self.particles)
 
       self.reset_out_of_bounds()
 
@@ -85,7 +86,7 @@ class Simulation:
                                  [-50,50])
 
     # random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
-    particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
+    #particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
 
     particle.acceleration = space.Vector3f()
 
