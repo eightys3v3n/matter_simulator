@@ -75,23 +75,8 @@ class Window(Window):
     self.objects = objects
     self.batch = pyglet.graphics.Batch()
 
-    bottom = screen_object.ScreenObject("rectangle",position=Position3f(0,-1000,0),size=Position3f(2000,0,2000))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],bottom.gl_vertices)
-
-    top = screen_object.ScreenObject("rectangle",position=Position3f(0,1000,0),size=Position3f(2000,0,2000))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],top.gl_vertices)
-
-    front = screen_object.ScreenObject("rectangle",position=Position3f(0,0,-1000),size=Position3f(2000,2000,0))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],front.gl_vertices)
-
-    back = screen_object.ScreenObject("rectangle",position=Position3f(0,0,1000),size=Position3f(2000,2000,0))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],back.gl_vertices)
-
-    left = screen_object.ScreenObject("rectangle",position=Position3f(-1000,0,0),size=Position3f(0,2000,2000))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],left.gl_vertices)
-
-    right = screen_object.ScreenObject("rectangle",position=Position3f(1000,0,0),size=Position3f(0,2000,2000))
-    self.batch.add_indexed(4,GL_QUADS,None,[0,1,2,3,0],right.gl_vertices)
+    cube = screen_object.ScreenObject("cube",position=Position3f(),radius=1000)
+    self.batch.add_indexed(24,GL_QUADS,None,[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],cube.gl_vertices)
 
     self.view = View()
 

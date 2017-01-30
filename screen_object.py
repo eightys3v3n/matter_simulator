@@ -20,7 +20,7 @@ class ScreenObject:
     self.size = Position3f()
     self.position = Position3f()
     self.size = Position3f()
-    self.colour = [255.0,255.0,255.0]
+    self.colour = variables.default_colour
 
     if position is not None:
       self.position = position
@@ -46,6 +46,11 @@ class ScreenObject:
         raise TypeError("size must be a Position3f")
       self.generate_rectangle()
 
+    elif o_type == "cube":
+      self.type = "cube"
+      self.max_points = 24
+      self.radius = radius
+
     elif o_type == "sphere":
       self.type = "sphere"
       self.max_points = 1
@@ -66,7 +71,7 @@ class ScreenObject:
 
     if self.type == "point":
       return gl.GL_POINTS
-    elif self.type == "rectangle":
+    elif self.type == "rectangle" or self.type == "cube":
       return gl.GL_QUADS
     else:
       raise Exception("unrecognized mode",self.type)
@@ -79,6 +84,8 @@ class ScreenObject:
 
     if self.type == "sphere":
       raise Exception("can't get the vertices of a sphere")
+    elif self.type == "cube":
+      return ('v3f',self.cube_vertices(self.position,self.radius))
 
     ret = ()
     for vert in self.vertices:
@@ -91,15 +98,14 @@ class ScreenObject:
     if self.headless:
       return None
 
-    if self.type != "rectangle":
-      raise Exception("can't get vertices of objects other than rectangles and cubes")
-
-    r = []
-    for i in range(len(self.vertices)):
-      r.append(i)
-    r.append(0)
-
-    return r
+    if self.type == "rectangle":
+      r = []
+      for i in range(len(self.vertices)):
+        r.append(i)
+      r.append(0)
+      return r
+    elif self.type == "cube":
+      return [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
 
   def add_point(self,point):
@@ -152,6 +158,47 @@ class ScreenObject:
       self.add_point(Position3f(p.x+p2.x/2,p.y-p2.y/2,p.z))
     else:
       raise Exception("you can't have a 3d rectangle",self.size)
+
+
+  def generate_cube(self):
+    self.gl_vertices = self.cube_vertices(self.position,self.radius)
+
+
+  def cube_vertices(self,position,n):
+    x = position.x*n*2
+    y = position.y*n*2
+    z = position.z*n*2
+    return (
+    # top
+    x-n,y+n,z+n,
+    x+n,y+n,z+n,
+    x+n,y+n,z-n,
+    x-n,y+n,z-n,
+    # front
+    x-n,y-n,z+n,
+    x+n,y-n,z+n,
+    x+n,y+n,z+n,
+    x-n,y+n,z+n,
+    # bottom
+    x-n,y-n,z-n,
+    x+n,y-n,z-n,
+    x+n,y-n,z+n,
+    x-n,y-n,z+n,
+    # left
+    x-n,y+n,z+n,
+    x-n,y+n,z-n,
+    x-n,y-n,z-n,
+    x-n,y-n,z+n,
+    # back
+    x-n,y+n,z-n,
+    x+n,y+n,z-n,
+    x+n,y-n,z-n,
+    x-n,y-n,z-n,
+    # right
+    x+n,y-n,z+n,
+    x+n,y-n,z-n,
+    x+n,y+n,z-n,
+    x+n,y+n,z+n)
 
 
   def update_from_particle(self,particle):
