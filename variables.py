@@ -13,7 +13,7 @@ pi = 3.14159265358979323846
 
 
 # shape stuff
-default_colour = [175.0,175.0,175.0] # RGB
+default_colour = [0.0,0.0,255.0] # RGB
 
 
 # controls
