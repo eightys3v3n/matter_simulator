@@ -5,8 +5,8 @@ from particle import Particle
 from screen_object import ScreenObject
 from window import Window
 from utils import Random3f
-from acceleration import gravity
-import variables,space,acceleration
+from gravity import gravity
+import variables,space
 
 
 # Simulation File

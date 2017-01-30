@@ -37,7 +37,7 @@ def Random3f(x_range,y_range,z_range):
     raise Exception("expected an z_range of [min,max]",z_range)
 
   ret = Position3f()
-  ret.x = Map(random(),0,1,x_range[0],x_range[1])
-  ret.y = Map(random(),0,1,y_range[0],y_range[1])
-  ret.z = Map(random(),0,1,z_range[0],z_range[1])
+  ret.x = Map(Random(),0,1,x_range[0],x_range[1])
+  ret.y = Map(Random(),0,1,y_range[0],y_range[1])
+  ret.z = Map(Random(),0,1,z_range[0],z_range[1])
   return ret
