@@ -9,12 +9,17 @@ from space import Position3f,Vector3f
 
 
 class Particle:
-  def __init__(self,mass=100,density=1):
-    self.mass = mass
-    self.density = density
+  def __init__(self,mass=None,density=None):
+    self.mass = 100
+    self.density = 2.6808
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))
     self.acceleration = Vector3f(Position3f(0,0,0))
+
+    if mass is not None:
+      self.mass == mass
+    if density is not None:
+      self.density = density
 
 
   # returns the radius as calculated by mass and density
