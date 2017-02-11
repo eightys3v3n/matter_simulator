@@ -11,8 +11,8 @@ from space import Position3f,Vector3f
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = 2000
-    self.density = 2.6808
+    self.mass = 10000
+    self.density = 500
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))
     self.acceleration = Vector3f(Position3f(0,0,0))
@@ -34,7 +34,7 @@ class Particle:
   # used like 'r = particle.radius'
   @property
   def radius(self):
-    v = self.mass * self.density
+    v = self.mass / self.density
     r = pow((3.0/(4.0 * variables.pi)) * v,1.0/3.0)
     return r
 
@@ -52,8 +52,8 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += self.acceleration/8.0
-    self.position += self.velocity.direction.destination/8.0
+    self.velocity += self.acceleration/10.0
+    self.position += self.velocity.direction.destination/10.0
 
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'

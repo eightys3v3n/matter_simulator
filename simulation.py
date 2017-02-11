@@ -25,11 +25,7 @@ class Simulation:
 
     self.new_particle()
     self.new_particle()
-    self.particles[0].acceleration = space.Vector3f(1,1,1)
-
     schedule_interval(self.update,variables.physics_update_time)
-
-
   # do all the physics calculations and move the particles
   def update(self,last_call_time):
     for i in range(len(self.particles)):
@@ -100,3 +96,4 @@ class Simulation:
         self.reset_particle(p)
       if p.position.z > variables.simulation_bounds[2] or p.position.z < -variables.simulation_bounds[2]:
         self.reset_particle(p)
+  
