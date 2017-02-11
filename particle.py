@@ -3,6 +3,7 @@ import variables
 from screen_object import ScreenObject
 from space import Position3f,Vector3f
 
+
 # Particle File
 # this file is for all the functions and classes that store the information about particles
 # these particles will be what move around the screen in clumps (spheres)
@@ -10,7 +11,7 @@ from space import Position3f,Vector3f
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = 1
+    self.mass = 2000
     self.density = 2.6808
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))
@@ -22,6 +23,11 @@ class Particle:
       self.density = density
     if position is not None:
       self.position = position
+  
+  def gravity(particles):
+    for i in range(len(particles)):
+      print(i,end=":")
+      particles[i].acceleration += gravity_on_particle(particles[i],particles)
 
 
   # returns the radius as calculated by mass and density
@@ -46,7 +52,7 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += self.acceleration/60.0
+    self.velocity += self.acceleration/80.0
     self.position += self.velocity.direction.destination
 
 
@@ -68,8 +74,6 @@ class Particle:
       return False
 
     return True
-
-
   def __repr__(self):
     string = ""
     #string = "radius:"+str(self.radius)+"\n"
