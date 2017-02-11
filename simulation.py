@@ -86,7 +86,7 @@ class Simulation:
                                  [-50,50])
 
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
-    #particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
+    particle.velocity = space.Vector3f(Random3f([-20,20],[-20,20],[-20,20]))
 
     particle.acceleration = space.Vector3f()
 
