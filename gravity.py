@@ -71,7 +71,7 @@ def gravity_on_particle(p1,particles):
   accel.destination.y = round(accel.destination.y,variables.precision)
   accel.destination.z = round(accel.destination.z,variables.precision)
 
-  print(accel)
+ 
 
   return accel
 
@@ -79,4 +79,4 @@ def gravity_on_particle(p1,particles):
 def gravity(particles):
   for i in range(len(particles)):
     print(i,end=":")
-    particles[i].acceleration += gravity_on_particle(particles[i],particles)
+    particles[i].acceleration = gravity_on_particle(particles[i],particles)
