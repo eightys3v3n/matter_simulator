@@ -25,10 +25,24 @@ class Simulation:
 
     self.new_particle()
     self.new_particle()
+    self.screen_objects[0].colour = variables.cool_colour
+    self.particles[0].mass = 75e4
+    self.particles[0].density = 2e4
+    self.particles[0].velocity = space.Vector3f(0,0,0)
+    self.particles[0].position = space.Position3f(0,0,0)
+    self.particles[0].acceleration = space.Vector3f(0,0,0)
+    
+    self.new_particle()
+    self.new_particle()
+    self.new_particle()
+    self.new_particle()
+    self.new_particle()
+    self.new_particle()
+       
     schedule_interval(self.update,variables.physics_update_time)
   # do all the physics calculations and move the particles
   def update(self,last_call_time):
-    for i in range(len(self.particles)):
+    for i in range(0,len(self.particles)):
 
       # do collisions
       self.collide()
@@ -82,7 +96,7 @@ class Simulation:
                                  [-50,50])
 
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
-    particle.velocity = space.Vector3f(Random3f([-20,20],[-20,20],[-20,20]))
+    particle.velocity = space.Vector3f(Random3f([-20000000,20000000],[-20000000,20000000],[-20000000,20000000]))
 
     particle.acceleration = space.Vector3f()
 

@@ -52,8 +52,8 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += self.acceleration/10.0
-    self.position += self.velocity.direction.destination/10.0
+    self.velocity += self.acceleration*0.0000001
+    self.position += self.velocity.direction.destination*0.0000001
 
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'

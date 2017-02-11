@@ -14,6 +14,7 @@ pi = 3.14159265358979323846
 
 # shape stuff
 default_colour = [0.0,0.0,255.0] # RGB
+cool_colour = [255.0,0.0,0.0]
 
 
 # controls
@@ -25,7 +26,7 @@ mouse_sensitivity = [0.5,0.5]
 default_sphere_args = [30,30]
 
 # perform a physics update every this many fractions of a second
-physics_update_time = 1/10.0
+physics_update_time = 1/100000
 
 # max number of actions that the simulation or the window can queue up before it is told
 # to wait before inserting any more
