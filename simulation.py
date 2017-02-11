@@ -38,7 +38,7 @@ class Simulation:
       self.collide()
 
       # do gravity here
-      #gravity(self.particles)
+      gravity(self.particles)
 
       self.reset_out_of_bounds()
 
@@ -85,7 +85,7 @@ class Simulation:
                                  [-50,50],
                                  [-50,50])
 
-    # random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
+    #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     #particle.velocity = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
 
     particle.acceleration = space.Vector3f()
