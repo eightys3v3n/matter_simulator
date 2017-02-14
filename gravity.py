@@ -25,7 +25,7 @@ def gravity_effect(mass,displacement):
   displacement: vector3f which is the distance from the particle being acted on to the particle acting on it
   acceleration: vector3f which is the current acceleration of the particle being acted on
   """
-  scalar = variables.gravity * mass / displacement.dot(displacement)
+  scalar = variables.gravity * (mass / displacement.dot(displacement))
   unit_vector = Vector3f()
   unit_vector = displacement / displacement.magnitude
   acceleration = unit_vector * scalar
@@ -61,7 +61,7 @@ def gravity_on_particle(p1,particles):
 
     accel = Vector3f()
     print("before",accel)
-    accel += gravity_between_particles(p1,particle)
+    accel = gravity_between_particles(p1,particle)
     print("after",accel)
 
   accel.origin.x = round(accel.origin.x,variables.precision)

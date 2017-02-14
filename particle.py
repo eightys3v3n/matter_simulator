@@ -11,8 +11,8 @@ from space import Position3f,Vector3f
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = 10000
-    self.density = 500
+    self.mass = 40
+    self.density = 4
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))
     self.acceleration = Vector3f(Position3f(0,0,0))
@@ -23,12 +23,6 @@ class Particle:
       self.density = density
     if position is not None:
       self.position = position
-  
-  def gravity(particles):
-    for i in range(len(particles)):
-      print(i,end=":")
-      particles[i].acceleration += gravity_on_particle(particles[i],particles)
-
 
   # returns the radius as calculated by mass and density
   # used like 'r = particle.radius'
@@ -52,7 +46,7 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += self.acceleration*0.0000001
+    self.velocity += self.acceleration*0.0000001 
     self.position += self.velocity.direction.destination*0.0000001
 
 

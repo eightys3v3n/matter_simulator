@@ -25,19 +25,18 @@ class Simulation:
 
     self.new_particle()
     self.new_particle()
-    self.screen_objects[0].colour = variables.cool_colour
-    self.particles[0].mass = 75e4
-    self.particles[0].density = 2e4
-    self.particles[0].velocity = space.Vector3f(0,0,0)
-    self.particles[0].position = space.Position3f(0,0,0)
-    self.particles[0].acceleration = space.Vector3f(0,0,0)
+    #self.screen_objects[0].colour = variables.cool_colour
+    #self.particles[0].mass = 1000
+    #self.particles[0].density = 100
+    #self.particles[0].position = space.Position3f(0,0,0)
+   
     
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
        
     schedule_interval(self.update,variables.physics_update_time)
   # do all the physics calculations and move the particles
@@ -91,12 +90,12 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-50,50],
-                                 [-50,50],
-                                 [-50,50])
+    particle.position = Random3f([-10,10],
+                                 [-10,10],
+                                 [-10,10])
 
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
-    particle.velocity = space.Vector3f(Random3f([-20000000,20000000],[-20000000,20000000],[-20000000,20000000]))
+    particle.velocity = space.Vector3f(Random3f([-0.000001,0.000001],[-0.000001,0.000001],[-0.000001,0.000001]))
 
     particle.acceleration = space.Vector3f()
 
