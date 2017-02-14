@@ -16,7 +16,10 @@ class Particle:
     self.position = Position3f()
     self.velocity = Vector3f(Position3f(0,0,0))
     self.acceleration = Vector3f(Position3f(0,0,0))
-
+    self.KE = .5*self.mass*self.velocity.dot(self.velocity)
+    self.GPE = 0
+    self.delta_GPE = 0
+    self.total_E = self.KE + self.GPE + self.delta_GPE
     if mass is not None:
       self.mass == mass
     if density is not None:
@@ -42,13 +45,12 @@ class Particle:
     new.destination = other.position
     return new
 
-
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += self.acceleration*0.0000001 
+    self.velocity += (self.acceleration/self.acceleration.magnitude)*((2*self.total_E)/self.mass)**(1/2)
     self.position += self.velocity.direction.destination*0.0000001
-
+	
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'
   def __eq__(self,other):

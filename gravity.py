@@ -37,9 +37,22 @@ def gravity_effect(mass,displacement):
   acceleration.destination.z = round(acceleration.destination.z,variables.precision)
 
   return acceleration
-
-
-
+def gravitational_potential_energy(mass,displacement,acceleration):
+  """
+  This will determine the maximum energy a particle can obtain inside the particular field in which it resides. 
+  This allows the particles to never reach escape velocity. Mass here is defined the same as in gravity_effect 
+  """
+  GPE = (mass * displacement.magnitude * acceleration)
+  return GPE
+def delta_GPE(GPE, particles):
+  for i in range(len(particles)):
+    particles[i].GPE = gravitational_potential_energy(particles[i].mass,particle[i].displacement, particle[i].acceleration)
+    if GPE > particles[i].GPE:
+      self.delta_GPE = GPE - particles[i].GPE 
+      return (self.delta_GPE)
+    else:
+      self.delta_GPE = particles[i].GPE - GPE 
+      return (self.delta_GPE)
 def gravity_between_particles(p1,p2):
   displacement = p1.displacement(p2)
 
