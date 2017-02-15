@@ -42,7 +42,7 @@ def gravitational_potential_energy(mass,displacement,acceleration):
   This will determine the maximum energy a particle can obtain inside the particular field in which it resides. 
   This allows the particles to never reach escape velocity. Mass here is defined the same as in gravity_effect 
   """
-  GPE = (mass * displacement.magnitude * acceleration)
+  GPE = (mass * displacement.magnitude * acceleration.magnitude)
   return GPE
 def delta_GPE(GPE, particles):
   for i in range(len(particles)):

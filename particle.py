@@ -48,7 +48,7 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += (self.acceleration/self.acceleration.magnitude)*((2*self.total_E)/self.mass)**(1/2)
+    self.velocity = ((self.acceleration/self.acceleration.magnitude)*((2*self.total_E)/self.mass)**(1/2))*0.0000001
     self.position += self.velocity.direction.destination*0.0000001
 	
 
