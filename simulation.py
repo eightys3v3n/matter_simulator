@@ -26,11 +26,6 @@ class Simulation:
     self.new_particle()
     self.new_particle()
     self.screen_objects[0].colour = variables.cool_colour
-    self.particles[0].mass = 1000
-    self.particles[0].density = 100
-    self.particles[0].position = space.Position3f(0,0,0)
-   
-    
     self.new_particle()
     self.new_particle()
     self.new_particle()
