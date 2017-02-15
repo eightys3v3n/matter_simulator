@@ -32,7 +32,8 @@ class Simulation:
     self.new_particle()
     self.new_particle()
     self.new_particle()
-       
+    self.reset_particle(self.particles[0])
+    self.reset_particle(self.particles[1])
     schedule_interval(self.update,variables.physics_update_time)
   # do all the physics calculations and move the particles
   def update(self,last_call_time):
