@@ -26,7 +26,7 @@ mouse_sensitivity = [0.5,0.5]
 default_sphere_args = [30,30]
 
 # perform a physics update every this many fractions of a second
-physics_update_time = 0.0000001
+physics_update_time = 0.00001
 
 # max number of actions that the simulation or the window can queue up before it is told
 # to wait before inserting any more
@@ -34,7 +34,7 @@ max_queue_size = 10
 
 
 # number of decimals that all calculations are rounded to
-precision = 6
+precision = 10
 
 
 # gravity constant
@@ -42,4 +42,4 @@ gravity = 6.67e-11
 
 
 # simulation world size
-simulation_bounds = [1000,1000,1000]
+simulation_bounds = [10000,10000,10000]

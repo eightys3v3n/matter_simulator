@@ -23,12 +23,12 @@ class Simulation:
     # an array of the ScreenObjects for all the particles
     self.screen_objects = screen_objects
 
-    self.new_particle()
-    self.new_particle()
-    self.screen_objects[0].colour = variables.cool_colour
-    self.new_particle()
-    self.new_particle()
-    self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
+    #self.screen_objects[0].colour = variables.cool_colour
+    #self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
     self.new_particle()
     self.new_particle()
     self.new_particle()
@@ -85,9 +85,9 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-10,10],
-                                 [-10,10],
-                                 [-10,10])
+    particle.position = Random3f([-100,100],
+                                 [-100,100],
+                                 [-100,100])
 
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     particle.velocity = space.Vector3f(Random3f([-20,20],[-20,20],[-20,20]))

@@ -2,19 +2,19 @@ import copy
 import variables
 from screen_object import ScreenObject
 from space import Position3f,Vector3f
-
+from utils import Random3f
 
 # Particle File
 # this file is for all the functions and classes that store the information about particles
 # these particles will be what move around the screen in clumps (spheres)
-
+from random import randint
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = 40
-    self.density = 4
-    self.position = Position3f()
-    self.velocity = Vector3f(Position3f(0,0,0))
+    self.mass = randint(100,10000)
+    self.density = randint(10,50)
+    self.position = Random3f([-4000,4000],[-4000,4000],[-4000,4000])
+    self.velocity = Vector3f(Random3f([-400,400],[-400,400],[-400,400]))
     self.acceleration = Vector3f(Position3f(0,0,0))
     self.KE = .5*self.mass*self.velocity.dot(self.velocity)
     self.GPE = 0
@@ -48,8 +48,8 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity = ((self.acceleration/self.acceleration.magnitude)*((2*self.total_E)/self.mass)**(1/2))*0.0000001
-    self.position += self.velocity.direction.destination*0.0000001
+    self.velocity = ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_GPE)/self.mass)**(1/2))*0.00001
+    self.position += self.velocity.direction.destination*0.00001
 	
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'
