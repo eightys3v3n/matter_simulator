@@ -13,10 +13,10 @@ class Particle:
   def __init__(self,mass=None,density=None,position=None):
     self.mass = randint(10,100)
     self.density = 10
-    self.position = Random3f([-4000,4000],[-4000,4000],[-4000,4000])
+    self.position = Random3f([-400,400],[-400,400],[-400,400])
     self.velocity_initial = Vector3f(Random3f([-400,400],[-400,400],[-400,400]))
     self.velocity = Vector3f(Position3f(0,0,0)) + self.velocity_initial
-    self.acceleration = Vector3f(Position3f(0,0,0))
+    self.acceleration = Vector3f()
     self.GPE = 0
     self.delta_GPE = 0
     self.delta_KE = 0
@@ -51,9 +51,10 @@ class Particle:
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    #self.velocity = (self.velocity_initial + ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2)))*0.001
-    self.velocity += (self.acceleration)*0.001
-    self.position += self.velocity.direction.destination*0.001
+    self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2))*0.001
+    #self.velocity += (self.acceleration)*0.001
+    self.position = self.position + self.velocity.direction.destination*0.001
+    
 	
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'
