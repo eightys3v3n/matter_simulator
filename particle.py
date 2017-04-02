@@ -11,10 +11,10 @@ from random import randint
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = randint(10,100)
-    self.density = 10
-    self.position = Random3f([-400,400],[-400,400],[-400,400])
-    self.velocity_initial = Vector3f(Random3f([-400,400],[-400,400],[-400,400]))
+    self.mass = randint(1e10,1e11)
+    self.density = 1e10
+    self.position = Random3f([-100,100],[-100,100],[-100,100])
+    self.velocity_initial = Vector3f(Random3f([-1,1],[-1,1],[-1,1]))
     self.velocity = Vector3f(Position3f(0,0,0)) + self.velocity_initial
     self.acceleration = Vector3f()
     self.GPE = 0
@@ -45,15 +45,17 @@ class Particle:
   def displacement(self,other):
     new = Vector3f()
     new.origin = self.position
-    new.destination = other.position
+    new.destination = self.position - other.position
     return new
 
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-    self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2))*0.001
-    #self.velocity += (self.acceleration)*0.001
-    self.position = self.position + self.velocity.direction.destination*0.001
+    #print("AAAAAAAAA:"+str(self.acceleration))
+    #print(self.acceleration)
+    #self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2))
+    self.velocity += (self.acceleration)*0.001
+    self.position += self.velocity.direction.destination*0.001
     
 	
 

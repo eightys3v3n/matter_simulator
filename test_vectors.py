@@ -154,17 +154,17 @@ class TestVector3f(unittest.TestCase):
     res += Vector3f(3,3,3,1,1,1)
 
     self.assertIs(res,init,msg="in-place addition isn't changing the original")
-    self.assertEqual(res,Vector3f(3,3,3,1,1,1))
+    self.assertEqual(res,Vector3f(0,0,0,1,1,1))
 
 
   def test___sub__(self):
     a = Vector3f(1,1,1,3,3,3)
-    b = Vector3f(2,2,2,1,1,1)
-    self.assertEqual(a-b,Vector3f(-1,-1,-1,2,2,2))
+    b = Vector3f(1,1,1,1,1,1)
+    self.assertEqual(a-b,Vector3f(1,1,1,2,2,2))
 
     a = Vector3f(1,1,1,4,4,4)
     b = Vector3f(1,1,1,3,3,3)
-    self.assertEqual(a-b,Vector3f(0,0,0,1,1,1))
+    self.assertEqual(a-b,Vector3f(1,1,1,1,1,1))
 
 
   def test___isub__(self):
@@ -173,7 +173,7 @@ class TestVector3f(unittest.TestCase):
     res -= Vector3f(2,2,2,1,1,1)
 
     self.assertIs(res,init,msg="in-place subtraction isn't changing the original")
-    self.assertEqual(res,Vector3f(-2,-2,-2,-1,-1,-1))
+    self.assertEqual(res,Vector3f(0,0,0,-1,-1,-1))
 
 
   def test___mul__(self):
