@@ -25,7 +25,7 @@ def gravity_effect(mass,displacement):
   displacement: vector3f which is the distance from the particle being acted on to the particle acting on it
   acceleration: vector3f which is the current acceleration of the particle being acted on
   """
-  scalar = -variables.gravity * (mass / displacement.dot(displacement))
+  scalar = variables.gravity * (mass / displacement.dot(displacement))
   unit_vector = displacement / displacement.magnitude
   acceleration = unit_vector * scalar
   acceleration.origin.x = round(acceleration.origin.x,variables.precision)
@@ -49,34 +49,19 @@ def gravity_between_particles(p1,p2):
   acceleration.destination.z = round(acceleration.destination.z,variables.precision)
 
   return acceleration
-def gravitational_potential_energy(mass,displacement,acceleration):
-  """
-  This will determine the maximum energy a particle can obtain inside the particular field in which it resides. 
-  This allows the particles to never reach escape velocity. Mass here is defined the same as in gravity_effect 
-  """
-  self.GPE = (self.mass * self.displacement.magnitude * self.acceleration.magnitude)
-  return self.GPE
   
 #this is supposed to run after the first time step to check the changes. 
-def delta_GPE(GPE, particles):
-  for i in range(len(particles)):
-    particles[i].GPE = gravitational_potential_energy(particles[i].mass,particle[i].displacement, particle[i].acceleration)
-    self.delta_GPE = self.GPE - particles[i].GPE 
-    if self.delta_GPE < 0:
-      print ("Oh fuck teh logic fails")
-    else:
-      return (self.delta_GPE)
-    
 
+	
 def gravity_on_particle(p1,particles):
   for particle in particles:
     if particle is p1:
       continue
-
-    accel = Vector3f()
-    #print("before",accel)
+  
+    accel = p1.acceleration
+    print("before",accel)
     accel = gravity_between_particles(p1,particle)
-    #print("after",accel)
+    print("after",accel)
 
   accel.origin.x = round(accel.origin.x,variables.precision)
   accel.origin.y = round(accel.origin.y,variables.precision)
@@ -85,13 +70,19 @@ def gravity_on_particle(p1,particles):
   accel.destination.y = round(accel.destination.y,variables.precision)
   accel.destination.z = round(accel.destination.z,variables.precision)
 
- 
+
 
   return accel
-
-
+def GPE(p1, particles):
+  p1.GPE = 0
+  for particle in particles:
+    if particle is p1:
+      continue
+    p1.GPE += p1.mass * p1.acceleration.magnitude * p1.displacement(particle).magnitude 
+	
 def gravity(particles):
   for i in range(len(particles)):
     particles[i].acceleration = gravity_on_particle(particles[i],particles)
-  #print(particles[1].acceleration)
-  print(particles[1].velocity)
+def gravitational_effect(particles):
+  for i in range(len(particles)):
+    particles[i].GPE = GPE(particles[i],particles)

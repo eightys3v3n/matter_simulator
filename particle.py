@@ -18,11 +18,8 @@ class Particle:
     self.velocity = Vector3f(Position3f(0,0,0)) + self.velocity_initial
     self.acceleration = Vector3f()
     self.GPE = 0
-    self.delta_GPE = 0
-    self.delta_KE = 0
-    self.KE = .5*self.mass*self.velocity_initial.dot(self.velocity_initial)+self.delta_GPE
-    self.total_E = self.KE + self.GPE + self.delta_GPE
-    self.delta_KE += self.delta_GPE
+    self.KE = .5*self.mass*self.velocity.dot(self.velocity)
+    self.E_total = self.GPE + self.KE
     if mass is not None:
       self.mass == mass
     if density is not None:
@@ -45,7 +42,7 @@ class Particle:
   def displacement(self,other):
     new = Vector3f()
     new.origin = self.position
-    new.destination = self.position - other.position
+    new.destination = other.position - self.position
     return new
 
   # is called every unit of time to move the particle according to it's
@@ -53,9 +50,10 @@ class Particle:
   def update(self):
     #print("AAAAAAAAA:"+str(self.acceleration))
     #print(self.acceleration)
-    #self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2))
-    self.velocity += (self.acceleration)*0.001
-    self.position += self.velocity.direction.destination*0.001
+    self.GPE = self.E_total - self.KE
+    self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.KE)/self.mass)**(1/2))*0.01
+    self.position += self.velocity.direction.destination *.01
+    self.KE = 0.5*self.mass*self.velocity.dot(self.velocity)
     
 	
 

@@ -5,7 +5,7 @@ from particle import Particle
 from screen_object import ScreenObject
 from window import Window
 from utils import Random3f
-from gravity import gravity
+from gravity import gravity, gravitational_effect
 import variables,space
 from random import randint
 
@@ -28,8 +28,8 @@ class Simulation:
     
     self.new_particle()
     self.new_particle()
-    self.new_particle()
-    self.new_particle()
+    #self.new_particle()
+    #self.new_particle()
     #self.new_particle()
     #self.new_particle()
     #self.reset_particle(self.particles[0])
@@ -44,6 +44,7 @@ class Simulation:
 
       # do gravity here
       gravity(self.particles)
+      gravitational_effect(self.particles)
 
       self.reset_out_of_bounds()
 
@@ -91,7 +92,7 @@ class Simulation:
     particle.density = 1e15
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     
-    particle.velocity_initial = space.Vector3f(Random3f([-0.01,0.01],[-0.01,0.01],[-0.01,0.01]))
+    particle.velocity_initial = space.Vector3f(Random3f([1,1],[1,1],[1,1]))
     particle.acceleration = space.Vector3f()
 
 
