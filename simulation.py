@@ -7,7 +7,6 @@ from window import Window
 from utils import Random3f
 from gravity import gravity, gravitational_effect
 import variables,space
-from random import randint
 
 
 # Simulation File
@@ -28,8 +27,19 @@ class Simulation:
     
     self.new_particle()
     self.new_particle()
+<<<<<<< HEAD
     #self.new_particle()
     #self.new_particle()
+=======
+    self.new_particle()
+    
+    self.new_particle()
+    self.screen_objects[0].colour = variables.cool_colour
+    self.particles[0].mass = 1e17
+    self.particles[0].density = 1e16
+    self.particles[0].velocity_initial = space.Vector3f(0,0,0)
+    self.particles[0].velocity = space.Vector3f(0,0,0)
+>>>>>>> parent of 75354af... I fixed it !!!!!
     #self.new_particle()
     #self.new_particle()
     #self.reset_particle(self.particles[0])
@@ -87,12 +97,17 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-20,20],[-20,20],[-20,20])
-    particle.mass = randint(1e15,1e16)
-    particle.density = 1e15
+    particle.position = Random3f([-100,100],
+                                 [-100,100],
+                                 [-100,100])
+
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     
+<<<<<<< HEAD
     particle.velocity_initial = space.Vector3f(Random3f([1,1],[1,1],[1,1]))
+=======
+    particle.velocity_initial = space.Vector3f(Random3f([-400,400],[-400,400],[-400,400]))
+>>>>>>> parent of 75354af... I fixed it !!!!!
     particle.acceleration = space.Vector3f()
 
 

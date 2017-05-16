@@ -463,7 +463,7 @@ class Vector3f:
       raise Exception("can't add Vector3f and",other)
 
     new = Vector3f()
-    new.origin = self.origin 
+    new.origin = self.origin + other.origin
     new.destination = self.destination + other.destination
 
     return new
@@ -473,7 +473,7 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't add Vector3f and",other)
 
-    self.origin = self.origin
+    self.origin += other.origin
     self.destination += other.destination
 
     return self
@@ -485,7 +485,7 @@ class Vector3f:
 
     new = Vector3f()
     new.destination = self.destination - other.destination
-    new.origin = self.origin 
+    new.origin = self.origin - other.origin
     return new
 
 
@@ -493,8 +493,8 @@ class Vector3f:
     if not isinstance(other,Vector3f):
       raise Exception("can't subtract Vector3f and",other)
 
-    self.origin = self.origin
-    self.destination -=  other.destination
+    self.origin -= other.origin
+    self.destination -= other.destination
 
     return self
 
@@ -574,8 +574,9 @@ class Vector3f:
   def magnitude(self):
     global precision
 
-    d_1 = self.direction.destination
-    mag = sqrt(pow(d_1.x,2)+pow(d_1.y,2)+pow(d_1.z,2))
+    d = self.direction.destination
+    mag = 0.0
+    mag = sqrt(pow(d.x,2)+pow(d.y,2)+pow(d.z,2))
     mag = round(mag,precision)
     return mag
 

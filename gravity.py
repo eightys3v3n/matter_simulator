@@ -26,6 +26,10 @@ def gravity_effect(mass,displacement):
   acceleration: vector3f which is the current acceleration of the particle being acted on
   """
   scalar = variables.gravity * (mass / displacement.dot(displacement))
+<<<<<<< HEAD
+=======
+  unit_vector = Vector3f()
+>>>>>>> parent of 75354af... I fixed it !!!!!
   unit_vector = displacement / displacement.magnitude
   acceleration = unit_vector * scalar
   acceleration.origin.x = round(acceleration.origin.x,variables.precision)
@@ -34,7 +38,7 @@ def gravity_effect(mass,displacement):
   acceleration.destination.x = round(acceleration.destination.x,variables.precision)
   acceleration.destination.y = round(acceleration.destination.y,variables.precision)
   acceleration.destination.z = round(acceleration.destination.z,variables.precision)
-  
+
   return acceleration
 
 def gravity_between_particles(p1,p2):
@@ -57,8 +61,13 @@ def gravity_on_particle(p1,particles):
   for particle in particles:
     if particle is p1:
       continue
+<<<<<<< HEAD
   
     accel = p1.acceleration
+=======
+
+    accel = Vector3f()
+>>>>>>> parent of 75354af... I fixed it !!!!!
     print("before",accel)
     accel = gravity_between_particles(p1,particle)
     print("after",accel)
@@ -82,7 +91,12 @@ def GPE(p1, particles):
 	
 def gravity(particles):
   for i in range(len(particles)):
+<<<<<<< HEAD
     particles[i].acceleration = gravity_on_particle(particles[i],particles)
 def gravitational_effect(particles):
   for i in range(len(particles)):
     particles[i].GPE = GPE(particles[i],particles)
+=======
+    print(i,end=":")
+    particles[i].acceleration = gravity_on_particle(particles[i],particles)
+>>>>>>> parent of 75354af... I fixed it !!!!!

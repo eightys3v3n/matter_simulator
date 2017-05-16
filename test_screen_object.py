@@ -83,7 +83,7 @@ class TestScreenObject(unittest.TestCase):
   def test_update_from_particle(self):
     so = ScreenObject("sphere",position=Position3f(),radius=1,headless=True)
     p = Particle()
-    p.mass = 100
-    p.density = 2.6808
+    p.mass = 2.6808
+    p.density = 100
     so.update_from_particle(p)
-    self.assertEqual(round(so.radius,3),2.073)
+    self.assertEqual(round(so.radius,3),4.0)
