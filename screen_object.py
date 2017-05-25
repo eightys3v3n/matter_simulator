@@ -21,7 +21,6 @@ class ScreenObject:
     self.position = Position3f()
     self.size = Position3f()
     self.colour = variables.default_colour
-
     if position is not None:
       self.position = position
     if colour is not None:

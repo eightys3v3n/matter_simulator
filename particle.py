@@ -11,7 +11,7 @@ from random import randint
 
 class Particle:
   def __init__(self,mass=None,density=None,position=None):
-    self.mass = randint(10,100)
+    self.mass = randint(10,1000)
     self.density = 10
     self.position = Random3f([-400,400],[-400,400],[-400,400])
     self.velocity_initial = Vector3f(Random3f([-400,400],[-400,400],[-400,400]))
@@ -42,30 +42,19 @@ class Particle:
   def displacement(self,other):
     new = Vector3f()
     new.origin = self.position
-<<<<<<< HEAD
     new.destination = other.position - self.position
-=======
     new.destination = other.position
->>>>>>> parent of 75354af... I fixed it !!!!!
     return new
 
   # is called every unit of time to move the particle according to it's
   # velocity and acceleration
   def update(self):
-<<<<<<< HEAD
     #print("AAAAAAAAA:"+str(self.acceleration))
     #print(self.acceleration)
     self.GPE = self.E_total - self.KE
     self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.KE)/self.mass)**(1/2))*0.01
     self.position += self.velocity.direction.destination *.01
     self.KE = 0.5*self.mass*self.velocity.dot(self.velocity)
-=======
-    self.velocity += ((self.acceleration/self.acceleration.magnitude)*((2*self.delta_KE)/self.mass)**(1/2))*0.001
-    #self.velocity += (self.acceleration)*0.001
-    self.position = self.position + self.velocity.direction.destination*0.001
->>>>>>> parent of 75354af... I fixed it !!!!!
-    
-	
 
   # when you use 'if a == b' it calls 'if a.__eq__(b)'
   def __eq__(self,other):
