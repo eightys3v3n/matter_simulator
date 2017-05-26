@@ -83,9 +83,9 @@ class Simulation:
   def reset_particle(self,particle):
     print("resetting particle")
     # random position between -5,-5,-5 and 5,5,5
-    particle.position = Random3f([-100,100],
-                                 [-100,100],
-                                 [-100,100])
+    particle.position = Random3f([-200,200],
+                                 [-200,200],
+                                 [-200,200])
 
     #random velocity between -0.01,-0.01,-0.01 and 0.01,0.01,0.01
     
